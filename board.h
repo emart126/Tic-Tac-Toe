@@ -8,9 +8,9 @@
 class Board {
     private:
         // Board fields
-        std::string sign;
+        char sign;
         int size;
-        std::vector<std::string> board;
+        std::vector<char> board;
         std::string winner;
 
     public:
@@ -34,6 +34,8 @@ class Board {
 
         // set cell c in the board to sign s
         void set(std::string c, char s);
+
+        // Other functions --------------------------------------------------------------
 
         // check if the given cell c is an empty cell on the current board
         bool isEmpty(std::string c);
