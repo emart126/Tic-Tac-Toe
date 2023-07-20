@@ -10,18 +10,24 @@ class Board {
         // Board fields
         std::string sign;
         int size;
-        std::vector<int> board;
+        std::vector<std::string> board;
         std::string winner;
 
     public:
+        // Class constructors -----------------------------------------------------------
+
         // constructor
         Board();
 
         // constructor given an n x n size  
         Board(int n);
 
+        // Access functions -------------------------------------------------------------
+
         // gets size of the board
         int getSize();
+
+        // Manipulation functions -------------------------------------------------------
 
         // sets size of the board
         void setSize();

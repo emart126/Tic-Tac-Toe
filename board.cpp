@@ -1,17 +1,40 @@
+#include <iostream>
 #include <string>
 #include <vector>
 #include "board.h"
 
-// Board Constructor
+// Class constructors -------------------------------------------------------------------
+
+// creates new Board in the empty state
 Board::Board() {
     sign = " ";
     size = 3;
-    board = {};
+    board.reserve(size*size);
+    for (int i = 0; i < board.size(); i++) {
+        board[i] = sign;
+    }
     winner = "";
 }
 
+// constructor given an n x n size  
+Board::Board(int n) {
+    sign = " ";
+    size = n;
+    board.reserve(size*size);
+    for (int i = 0; i < board.size(); i++) {
+        board[i] = sign;
+    }
+    winner = "";
+}
+
+// Access functions ---------------------------------------------------------------------
+
 // gets size of the board
-int getSize();
+int Board::getSize() {
+    return(size);
+}
+
+// Manipulation functions ---------------------------------------------------------------
 
 // sets size of the board
 void setSize();
@@ -30,3 +53,12 @@ bool isDone();
 
 // print the board to show it
 void show();
+
+
+
+// temp tests
+int main() {
+    Board myB = Board(10);
+    std::cout << myB.getSize() << std::endl;
+    return(0);
+}
