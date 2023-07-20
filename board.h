@@ -29,9 +29,6 @@ class Board {
 
         // Manipulation functions -------------------------------------------------------
 
-        // sets size of the board
-        void setSize();
-
         // sets board winner and returns the winner's sign O or X
         std::string getWinner();
 

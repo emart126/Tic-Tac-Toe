@@ -36,9 +36,6 @@ int Board::getSize() {
 
 // Manipulation functions ---------------------------------------------------------------
 
-// sets size of the board
-void setSize();
-
 // sets board winner and returns the winner's sign O or X
 std::string getWinner();
 
@@ -53,12 +50,3 @@ bool isDone();
 
 // print the board to show it
 void show();
-
-
-
-// temp tests
-int main() {
-    Board myB = Board(10);
-    std::cout << myB.getSize() << std::endl;
-    return(0);
-}
