@@ -8,10 +8,10 @@
 class Board {
     private:
         // Board fields
-        char sign;
-        char winner;
+        std::string sign;
+        std::string winner;
         int size;
-        std::vector<char> board;
+        std::vector<std::string> board;
         std::vector<std::string> cells;
         
 
@@ -32,10 +32,10 @@ class Board {
         // Manipulation functions -------------------------------------------------------
 
         // sets board winner and returns the winner's sign O or X
-        char getWinner();
+        std::string getWinner();
 
         // set cell c in the board to sign s
-        void set(std::string c, char s);
+        void set(std::string c, std::string s);
 
         // Other functions --------------------------------------------------------------
 
