@@ -12,7 +12,7 @@ class Board {
         char winner;
         int size;
         std::vector<char> board;
-        std::vector<string> cells;
+        std::vector<std::string> cells;
         
 
     public:

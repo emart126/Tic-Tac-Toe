@@ -6,8 +6,8 @@
 // Helper functions ---------------------------------------------------------------------
 
 // fill row vectors with data from the board b
-std::vector<std::vector<char>> fillRows(Board b) {
-    int brdI, vecI, innerCevI = 0;
+std::vector<std::vector<char>> fillRows(std::vector<char> b, int size) {
+    int brdI, vecI, innerVecI = 0;
     std::vector<std::vector<char>> rows(size, std::vector<char> (size, ' '));
     
     while(vecI < size) {
@@ -24,12 +24,12 @@ std::vector<std::vector<char>> fillRows(Board b) {
 }
 
 // fill column vectors with data from the board b
-std::vector<std::vector<char>> fillCols(Board b) {
-    int brdI, vecI, innerCevI = 0;
+std::vector<std::vector<char>> fillCols(std::vector<char> b, int size) {
+    int brdI, vecI, innerVecI = 0;
     std::vector<std::vector<char>> cols(size, std::vector<char> (size, ' ')); 
 
     while(vecI < size) {
-        cols[vecI][innerVecI] = board[brdI];
+        cols[vecI][innerVecI] = b[brdI];
         brdI+=size;
 
         innerVecI++;
@@ -43,12 +43,12 @@ std::vector<std::vector<char>> fillCols(Board b) {
 }
 
 // fill diagonal vectors with data from the board b
-std::vector<std::vector<char>> fillDiagonals(Board V=b) {
-    int brdI, vecI, innerCevI = 0;
+std::vector<std::vector<char>> fillDiagonals(std::vector<char> b, int size) {
+    int brdI, vecI, innerVecI = 0;
     std::vector<std::vector<char>> diagonals(2, std::vector<char> (size, ' '));
 
     while(vecI < 1) {
-        diagonals[vecI][innerVecI] = board[brdI];
+        diagonals[vecI][innerVecI] = b[brdI];
         brdI+=size+1;
 
         innerVecI++;
@@ -60,7 +60,7 @@ std::vector<std::vector<char>> fillDiagonals(Board V=b) {
     brdI = size-1;
     innerVecI = 0;
     while(vecI < 2) {
-        diagonals[vecI][innerVecI] = board[brdI];
+        diagonals[vecI][innerVecI] = b[brdI];
         brdI+=size-1;
 
         innerVecI++;
@@ -73,7 +73,7 @@ std::vector<std::vector<char>> fillDiagonals(Board V=b) {
 }
 
 // check if there exists a winner by checking if there is a vector where all the elements are the same sign
-void findWinner(std::vector<std::vector<char>> vectors, Board b) {
+char findWinner(std::vector<std::vector<char>> vectors) {
     bool exists;
     std::vector<char> vec;
 
@@ -88,10 +88,11 @@ void findWinner(std::vector<std::vector<char>> vectors, Board b) {
                 }
             }
             if (exists) {
-                b.winner = vec[0];
+                return(vec[0]);
             }
         }
     }
+    return(' ');
 }
 
 // Class constructors -------------------------------------------------------------------
@@ -100,7 +101,7 @@ void findWinner(std::vector<std::vector<char>> vectors, Board b) {
 Board::Board() {
     // fill vars
     sign = ' ';
-    winner = '';
+    winner = ' ';
     size = 3;
 
     // fill board with empty spaces
@@ -123,7 +124,7 @@ Board::Board() {
 Board::Board(int n) {
     //fill vars
     sign = ' ';
-    winner = '';
+    winner = ' ';
     size = n;
 
     // fill board with empty spaces
@@ -134,7 +135,14 @@ Board::Board(int n) {
 
     // create cells of board
     std::vector<std::string> alphabet = {"A","B","C","D","E","F","G","H","I"};
-    std::vector<std::string> gameCols = {alphabet.begin(), alphabet.begin()+size+1}
+    std::vector<std::string> gameCols = {alphabet.begin(), alphabet.begin()+size};
+
+    std::cout << "s: " << gameCols.size() << std::endl;
+    for (int i = 0; i < gameCols.size(); i++) {
+        std::cout << gameCols[i] << " ";
+    }
+    std::cout << std::endl;
+
     for (int i = 1; i <= size; i++) {
         for (int j = 0; j < gameCols.size(); j++) {
             cells.push_back(gameCols[j]+std::to_string(i));
@@ -154,21 +162,21 @@ int Board::getSize() {
 // sets board winner and returns the winner's sign O or X
 char Board::getWinner() {
     // fill vectors to get rows, cols and diagonals
-    std::vector<std::vector<char>> rows = fillRows(Board);
-    std::vector<std::vector<char>> columns = fillCols(Board);  
-    std::vector<std::vector<char>> diagonals = fillDiagonals(Board);
+    std::vector<std::vector<char>> rows = fillRows(board, size);
+    std::vector<std::vector<char>> columns = fillCols(board, size);  
+    std::vector<std::vector<char>> diagonals = fillDiagonals(board, size);
 
     // check if there is a winner
-    findWinner(rows, board);
-    findWinner(columns, board);
-    findWinner(diagonals, board);
+    char winnerSign = ' ';
+    winnerSign = findWinner(rows);
+    winnerSign = findWinner(columns);
+    winnerSign = findWinner(diagonals);
+    winner = winnerSign;
     return(winner);
 }
 
 // set cell c in the board to sign s
-void Board::set(std::string c, char s) {
-    
-}
+void set(std::string c, char s);
 
 // Other functions ----------------------------------------------------------------------
 
@@ -179,4 +187,16 @@ bool isEmpty(std::string c);
 bool isDone();
 
 // print the board to show it
-void show();
+void Board::show() {
+    for (int i = 0; i < cells.size(); i++) {
+        std::cout << cells[i] << " ";
+    }
+    std::cout << std::endl;
+}
+
+
+int main() {
+    Board myB = Board(9);
+    myB.show();
+    return(0);
+}
