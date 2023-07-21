@@ -95,6 +95,12 @@ char findWinner(std::vector<std::vector<char>> vectors) {
     return(' ');
 }
 
+// convert char to string
+std::string charToStr(char x) {
+    std::string s(1, x);
+    return(s);
+}
+
 // Class constructors -------------------------------------------------------------------
 
 // creates new Board in the empty state
@@ -137,11 +143,11 @@ Board::Board(int n) {
     std::vector<std::string> alphabet = {"A","B","C","D","E","F","G","H","I"};
     std::vector<std::string> gameCols = {alphabet.begin(), alphabet.begin()+size};
 
-    std::cout << "s: " << gameCols.size() << std::endl;
-    for (int i = 0; i < gameCols.size(); i++) {
-        std::cout << gameCols[i] << " ";
-    }
-    std::cout << std::endl;
+    // std::cout << "s: " << gameCols.size() << std::endl;
+    // for (int i = 0; i < gameCols.size(); i++) {
+    //     std::cout << gameCols[i] << " ";
+    // }
+    // std::cout << std::endl;
 
     for (int i = 1; i <= size; i++) {
         for (int j = 0; j < gameCols.size(); j++) {
@@ -193,6 +199,7 @@ void Board::set(std::string c, char s) {
     for (int i = 0; i < cells.size(); i++) {
         if (cells[i] == c) {
             index = i;
+            std::cout << "setting " << i << std::endl;
             break;
         }
     }
@@ -209,16 +216,44 @@ bool isDone();
 
 // print the board to show it
 void Board::show() {
-    
+    for (int i = 0; i < size; i++) {
+        std::cout << board[i] << " ";
+    }
+    std::cout << std::endl;
+
+    std::string line = " +";
+    std::string gameColumns = "";
+    std::vector<std::string> alphabet = {"A","B","C","D","E","F","G","H","I"};
+    std::vector<std::string> gameCols = {alphabet.begin(), alphabet.begin()+size};
+    std::vector<std::vector<char>> rows = fillRows(board, size);
+
+    for (int i = 1; i <= size; i++) {
+        line+="---+";
+    }
+    for (int i = 0; i < gameCols.size(); i++) {
+        gameColumns+="   "+gameCols[i];
+    }
+
+    std::cout << gameColumns << std::endl << line << std::endl;
+    std::string currRow;
+    for (int i = 0; i < size; i++) {
+        currRow = std::to_string(i+1)+"|";
+        for (int j = 0; j < size; j++) {
+            currRow+=(" " + charToStr(rows[i][j]) + " |");
+        }
+        std::cout << currRow << std::endl << line << std::endl;
+    }
 }
 
 
 
 int main() {
     Board myB = Board();
+    myB.show();
     myB.set("A1", 'X');
     myB.set("B1", 'X');
     myB.set("C1", 'X');
+    myB.show();
     std::cout << myB.getWinner() << std::endl;
 
     return(0);
