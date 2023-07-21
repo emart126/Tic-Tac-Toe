@@ -9,9 +9,11 @@ class Board {
     private:
         // Board fields
         char sign;
+        char winner;
         int size;
         std::vector<char> board;
-        char winner;
+        std::vector<string> cells;
+        
 
     public:
         // Class constructors -----------------------------------------------------------

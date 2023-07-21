@@ -98,24 +98,48 @@ void findWinner(std::vector<std::vector<char>> vectors, Board b) {
 
 // creates new Board in the empty state
 Board::Board() {
+    // fill vars
     sign = ' ';
+    winner = '';
     size = 3;
+
+    // fill board with empty spaces
     board.reserve(size*size);
     for (int i = 0; i < board.size(); i++) {
         board[i] = sign;
     }
-    winner = '';
+
+    // create cells of board
+    std::vector<std::string> gameCols = {"A","B","C"};
+    for (int i = 1; i <= size; i++) {
+        for (int j = 0; j < gameCols.size(); j++) {
+            cells.push_back(gameCols[j]+std::to_string(i));
+        }
+    }
+    
 }
 
 // constructor given an n x n size  
 Board::Board(int n) {
+    //fill vars
     sign = ' ';
+    winner = '';
     size = n;
+
+    // fill board with empty spaces
     board.reserve(size*size);
     for (int i = 0; i < board.size(); i++) {
         board[i] = sign;
     }
-    winner = '';
+
+    // create cells of board
+    std::vector<std::string> alphabet = {"A","B","C","D","E","F","G","H","I"};
+    std::vector<std::string> gameCols = {alphabet.begin(), alphabet.begin()+size+1}
+    for (int i = 1; i <= size; i++) {
+        for (int j = 0; j < gameCols.size(); j++) {
+            cells.push_back(gameCols[j]+std::to_string(i));
+        }
+    }
 }
 
 // Access functions ---------------------------------------------------------------------
@@ -142,7 +166,9 @@ char Board::getWinner() {
 }
 
 // set cell c in the board to sign s
-void set(std::string c, char s);
+void Board::set(std::string c, char s) {
+    
+}
 
 // Other functions ----------------------------------------------------------------------
 
