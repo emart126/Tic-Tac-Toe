@@ -3,6 +3,75 @@
 #include <vector>
 #include "board.h"
 
+// Helper functions ---------------------------------------------------------------------
+
+// fill row vectors with data from the board b
+std::vector<std::vector<char>> fillRows(Board b) {
+    int brdI, vecI, innerCevI = 0;
+    std::vector<std::vector<char>> rows(size, std::vector<char> (size, ' '));
+    
+    while(vecI < size) {
+        rows[vecI][innerVecI] = b[brdI];
+        brdI++;
+
+        innerVecI++;
+        if (innerVecI == size-1) {
+            innerVecI = 0;
+            vecI++;
+        }
+    }
+    return(rows);
+}
+
+// fill column vectors with data from the board b
+std::vector<std::vector<char>> fillCols(Board b) {
+    int brdI, vecI, innerCevI = 0;
+    std::vector<std::vector<char>> cols(size, std::vector<char> (size, ' ')); 
+
+    while(vecI < size) {
+        cols[vecI][innerVecI] = board[brdI];
+        brdI+=size;
+
+        innerVecI++;
+        if (innerVecI == size-1) {
+            innerVecI = 0;
+            vecI++;
+            brdI = vecI;
+        }
+    }
+    return(cols);
+}
+
+// fill diagonal vectors with data from the board b
+std::vector<std::vector<char>> fillDiagonals(Board V=b) {
+    int brdI, vecI, innerCevI = 0;
+    std::vector<std::vector<char>> diagonals(2, std::vector<char> (size, ' '));
+
+    while(vecI < 1) {
+        diagonals[vecI][innerVecI] = board[brdI];
+        brdI+=size+1;
+
+        innerVecI++;
+        if (innerVecI == size-1) {
+            innerVecI = 0;
+            vecI++;
+        }
+    }
+    brdI = size-1;
+    innerVecI = 0;
+    while(vecI < 2) {
+        diagonals[vecI][innerVecI] = board[brdI];
+        brdI+=size-1;
+
+        innerVecI++;
+        if (innerVecI == size-1) {
+            innerVecI = 0;
+            vecI++;
+        }
+    }
+    return(diagonals);
+}
+
 // Class constructors -------------------------------------------------------------------
 
 // creates new Board in the empty state
@@ -38,67 +107,13 @@ int Board::getSize() {
 
 // sets board winner and returns the winner's sign O or X
 std::string Board::getWinner() {
-    int brdI;
-    int vecI;
-    int innerVecI;
-    std::vector<std::vector<char>> rows(size, std::vector<char> (size, ' '));
-    std::vector<std::vector<char>> cols(size, std::vector<char> (size, ' '));  
-    std::vector<std::vector<char>> diagonals(2, std::vector<char> (size, ' '));
-
-    // row vector
-    brdI, vecI, innerVecI = 0;
-    while(vecI < size) {
-        rows[vecI][innerVecI] = board[brdI];
-        brdI++;
-
-        innerVecI++;
-        if (innerVecI == size-1) {
-            innerVecI = 0;
-            vecI++;
-        }
-    }
-
-    // col vector
-    brdI, vecI, innerVecI = 0;
-    while(vecI < size) {
-        cols[vecI][innerVecI] = board[brdI];
-        brdI+=size;
-
-        innerVecI++;
-        if (innerVecI == size-1) {
-            innerVecI = 0;
-            vecI++;
-            brdI = vecI;
-        }
-    }
-
-    // diagonal vectors
-    brdI, vecI, innerVecI = 0;
-    while(vecI < 1) {
-        diagonals[vecI][innerVecI] = board[brdI];
-        brdI+=size+1;
-
-        innerVecI++;
-        if (innerVecI == size-1) {
-            innerVecI = 0;
-            vecI++;
-        }
-    }
-    brdI = size-1;
-    innerVecI = 0;
-    while(vecI < 2) {
-        diagonals[vecI][innerVecI] = board[brdI];
-        brdI+=size-1;
-
-        innerVecI++;
-        if (innerVecI == size-1) {
-            innerVecI = 0;
-            vecI++;
-        }
-    }
+    // fill vectors to get rows, cols and diagonals
+    std::vector<std::vector<char>> r = fillRows(Board);
+    std::vector<std::vector<char>> c = fillCols(Board);  
+    std::vector<std::vector<char>> d = fillDiagonals(Board);
 
     // check if there is a winner
-
+    
 }
 
 // set cell c in the board to sign s
