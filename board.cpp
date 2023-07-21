@@ -72,6 +72,27 @@ std::vector<std::vector<char>> fillDiagonals(Board V=b) {
     return(diagonals);
 }
 
+// check if there exists a winner by checking if there is a vector where all the elements are the same sign
+void findWinner(std::vector<std::vector<char>> vectors, Board b) {
+    bool exists;
+    std::vector<char> vec;
+
+    for (int i = 0; i < vectors.size()-1; i++) {
+        exists = true;
+        vec = vectors[i];
+        if (vec[0] != ' ') {
+            for (int j = 0; j < vec.size()-1; j++) {
+                if (vec[j] != vec[j+1]) {
+                    exists = false;
+                    break;
+                }
+            }
+            if (exists) {
+                b.winner = vec[0];
+            }
+        }
+    }
+}
 
 // Class constructors -------------------------------------------------------------------
 
@@ -114,62 +135,9 @@ char Board::getWinner() {
     std::vector<std::vector<char>> diagonals = fillDiagonals(Board);
 
     // check if there is a winner
-    bool exists;
-
-    // check all rows
-    exists = true;
-    std::vector<char> row;
-    for (int i = 0; i < rows.size()-1; i++) {
-        row = rows[i];
-        if (row[0] != ' ') {
-            for (int j = 0; j < row.size()-1; j++) {
-                if (row[j] != row[j+1]) {
-                    exists = false;
-                    break;
-                }
-            }
-            if (exists) {
-                winner = row[0];
-            }
-        }
-    }
-
-    // check all columns
-    exists = true;
-    std::vector<char> col;
-    for (int i = 0; i < columns.size(); i++) {
-        col = columns[i];
-        if (col[0] != ' ') {
-            for (int j = 0; j < col.size()-1; j++) {
-                if (col[j] != col[j+1]) {
-                    exists = false;
-                    break;
-                }
-            }
-            if (exists) {
-                winner = col[0];
-            }
-        }
-    }
-
-    // check both diagonals
-    exists = true;
-    std::vector<char> diag;
-    for (int i = 0; i < diagonals.size(); i++) {
-        diag = diagonals[i];
-        if (diag[0] != ' ') {
-            for (int j = 0; j < diag.size()-1; j++) {
-                if (diag[j] != diag[j+1]) {
-                    exists = false;
-                    break;
-                }
-            }
-            if (exists) {
-                winner = diag[0];
-            }
-        }
-    }
-
+    findWinner(rows, board);
+    findWinner(columns, board);
+    findWinner(diagonals, board);
     return(winner);
 }
 
