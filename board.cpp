@@ -167,16 +167,37 @@ char Board::getWinner() {
     std::vector<std::vector<char>> diagonals = fillDiagonals(board, size);
 
     // check if there is a winner
-    char winnerSign = ' ';
-    winnerSign = findWinner(rows);
-    winnerSign = findWinner(columns);
-    winnerSign = findWinner(diagonals);
-    winner = winnerSign;
-    return(winner);
+    char winnerSign, currSign = ' ';
+    currSign = findWinner(rows);
+    if (currSign != ' ') {
+        winner = currSign;
+        return(winner);
+    }
+    currSign = findWinner(columns);
+    if (currSign != ' ') {
+        winner = currSign;
+        return(winner);
+    }
+    currSign = findWinner(diagonals);
+    if (currSign != ' ') {
+        winner = currSign;
+        return(winner);
+    }
+    return(' ');
+    
 }
 
 // set cell c in the board to sign s
-void set(std::string c, char s);
+void Board::set(std::string c, char s) {
+    int index;
+    for (int i = 0; i < cells.size(); i++) {
+        if (cells[i] == c) {
+            index = i;
+            break;
+        }
+    }
+    board[index] = s;
+}
 
 // Other functions ----------------------------------------------------------------------
 
@@ -188,15 +209,17 @@ bool isDone();
 
 // print the board to show it
 void Board::show() {
-    for (int i = 0; i < cells.size(); i++) {
-        std::cout << cells[i] << " ";
-    }
-    std::cout << std::endl;
+    
 }
 
 
+
 int main() {
-    Board myB = Board(9);
-    myB.show();
+    Board myB = Board();
+    myB.set("A1", 'X');
+    myB.set("B1", 'X');
+    myB.set("C1", 'X');
+    std::cout << myB.getWinner() << std::endl;
+
     return(0);
 }
