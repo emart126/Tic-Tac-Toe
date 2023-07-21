@@ -11,7 +11,7 @@ class Board {
         char sign;
         int size;
         std::vector<char> board;
-        std::string winner;
+        char winner;
 
     public:
         // Class constructors -----------------------------------------------------------
@@ -30,7 +30,7 @@ class Board {
         // Manipulation functions -------------------------------------------------------
 
         // sets board winner and returns the winner's sign O or X
-        std::string getWinner();
+        char getWinner();
 
         // set cell c in the board to sign s
         void set(std::string c, char s);
