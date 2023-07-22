@@ -95,12 +95,6 @@ std::string findWinner(std::vector<std::vector<std::string>> vectors) {
     return(" ");
 }
 
-// convert char to string
-std::string charToStr(char x) {
-    std::string s(1, x);
-    return(s);
-}
-
 // Class constructors -------------------------------------------------------------------
 
 // creates new Board in the empty state
@@ -111,10 +105,7 @@ Board::Board() {
     size = 3;
 
     // fill board with empty spaces
-    board.reserve(size*size);
-    for (int i = 0; i < board.size(); i++) {
-        board[i] = sign;
-    }
+    board.resize(size*size, sign);
 
     // create cells of board
     std::vector<std::string> gameCols = {"A","B","C"};
@@ -134,10 +125,7 @@ Board::Board(int n) {
     size = n;
 
     // fill board with empty spaces
-    board.reserve(size*size);
-    for (int i = 0; i < board.size(); i++) {
-        board[i] = sign;
-    }
+    board.resize(size*size, sign);
 
     // create cells of board
     std::vector<std::string> alphabet = {"A","B","C","D","E","F","G","H","I"};
@@ -209,11 +197,6 @@ bool isDone();
 
 // print the board to show it
 void Board::show() {
-    for (int i = 0 ; i < size*size; i++) {
-        std::cout << board[i] << "_";
-    }
-    std::cout << std::endl;
-
     std::string line = " +";
     std::string gameColumns = "";
     std::vector<std::string> alphabet = {"A","B","C","D","E","F","G","H","I"};
@@ -228,24 +211,19 @@ void Board::show() {
     }
 
     std::cout << gameColumns << std::endl << line << std::endl;
-    std::string currRow;
     for (int i = 0; i < size; i++) {
-        //currRow = std::to_string(i+1)+"|";
         std::cout << i+1 << "|";
         for (int j = 0; j < size; j++) {
-            //currRow+=" ";
-            //currRow+=rows[i][j];
-            //currRow+=" |";
             std::cout << " " << rows[i][j] << " |";
         }
-        std::cout << /*currRow <<*/ std::endl << line << std::endl;
+        std::cout << std::endl << line << std::endl;
     }
 }
 
 
 
 int main() {
-    Board myB = Board(3);
+    Board myB = Board();
     myB.show();
     myB.set("A1", "X");
     myB.set("B1", "X");
