@@ -258,7 +258,7 @@ void Board::show() {
 
 
 // int main() {
-//     Board myB = Board();
+//     Board myB = Board(5);
 //     myB.show();
 //     myB.set("A1", "X");
 //     myB.set("A2", "O");
@@ -279,6 +279,8 @@ void Board::show() {
 //         std::cout << "c3 is empty" << std::endl;
 //     }
 //     myB.set("C3", "X");
+//     myB.set("D4", "X");
+//     myB.set("E5", "X");
 //     myB.show();
 //     if (myB.isDone()) {
 //         std::cout << "game is now done" << std::endl; 
