@@ -77,7 +77,7 @@ std::string findWinner(std::vector<std::vector<std::string>> vectors) {
     bool exists;
     std::vector<std::string> vec;
 
-    for (int i = 0; i < vectors.size()-1; i++) {
+    for (int i = 0; i < vectors.size(); i++) {
         exists = true;
         vec = vectors[i];
         if (vec[0] != " ") {
@@ -226,8 +226,8 @@ int main() {
     Board myB = Board();
     myB.show();
     myB.set("A3", "X");
-    myB.set("B3", "X");
-    myB.set("C3", "X");
+    myB.set("B2", "X");
+    myB.set("C1", "X");
     myB.show();
     std::cout << "Winner is : " << myB.getWinner() << std::endl;
 
