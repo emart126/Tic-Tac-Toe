@@ -190,10 +190,45 @@ void Board::set(std::string c, std::string s) {
 // Other functions ----------------------------------------------------------------------
 
 // check if the given cell c is an empty cell on the current board
-bool isEmpty(std::string c);
+bool Board::isEmpty(std::string c) {
+    int index;
+    for (int i = 0; i < cells.size(); i++) {
+        if (cells[i] == c) {
+            index = i;
+            break;
+        }
+    }
+    if (board[index] == " ") {
+        return(true);
+    }
+    else {
+        return(false);
+    }
+}
 
 // check if their is an end condition to see if the game is done
-bool isDone();
+bool Board::isDone() {
+    // fill vectors to get rows, cols and diagonals
+    std::vector<std::vector<std::string>> rows = fillRows(board, size);
+    std::vector<std::vector<std::string>> columns = fillCols(board, size);  
+    std::vector<std::vector<std::string>> diagonals = fillDiagonals(board, size);
+
+    // check if a winner exists and
+    std::string winnerSign, currSign = " ";
+    currSign = findWinner(rows);
+    if (currSign != " ") {
+        return(true);
+    }
+    currSign = findWinner(columns);
+    if (currSign != " ") {
+        return(true);
+    }
+    currSign = findWinner(diagonals);
+    if (currSign != " ") {
+        return(true);
+    }
+    return(false);
+}
 
 // print the board to show it
 void Board::show() {
@@ -233,8 +268,21 @@ int main() {
     myB.set("B3", "X");
     myB.set("C1", "O");
     myB.set("C2", "X");
-    myB.set("C3", "O");
     myB.show();
+    if (myB.isDone()) {
+        std::cout << "error" << std::endl;
+    }
+    else {
+        std::cout << "game isnt done" << std::endl;
+    }
+    if (myB.isEmpty("C3")) {
+        std::cout << "c3 is empty" << std::endl;
+    }
+    myB.set("C3", "X");
+    myB.show();
+    if (myB.isDone()) {
+        std::cout << "game is now done" << std::endl; 
+    }
     std::cout << "Winner is : " << myB.getWinner() << std::endl;
 
     return(0);
