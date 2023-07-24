@@ -15,7 +15,7 @@ std::vector<std::vector<std::string>> fillRows(std::vector<std::string> b, int s
         brdI++;
 
         innerVecI++;
-        if (innerVecI == size-1) {
+        if (innerVecI == size) {
             innerVecI = 0;
             vecI++;
         }
@@ -33,7 +33,7 @@ std::vector<std::vector<std::string>> fillCols(std::vector<std::string> b, int s
         brdI+=size;
 
         innerVecI++;
-        if (innerVecI == size-1) {
+        if (innerVecI == size) {
             innerVecI = 0;
             vecI++;
             brdI = vecI;
@@ -52,7 +52,7 @@ std::vector<std::vector<std::string>> fillDiagonals(std::vector<std::string> b, 
         brdI+=size+1;
 
         innerVecI++;
-        if (innerVecI == size-1) {
+        if (innerVecI == size) {
             innerVecI = 0;
             vecI++;
         }
@@ -64,7 +64,7 @@ std::vector<std::vector<std::string>> fillDiagonals(std::vector<std::string> b, 
         brdI+=size-1;
 
         innerVecI++;
-        if (innerVecI == size-1) {
+        if (innerVecI == size) {
             innerVecI = 0;
             vecI++;
         }
@@ -225,11 +225,11 @@ void Board::show() {
 int main() {
     Board myB = Board();
     myB.show();
-    myB.set("A1", "X");
-    myB.set("B1", "X");
-    myB.set("C1", "X");
+    myB.set("A3", "X");
+    myB.set("B3", "X");
+    myB.set("C3", "X");
     myB.show();
-    std::cout << myB.getWinner() << std::endl;
+    std::cout << "Winner is : " << myB.getWinner() << std::endl;
 
     return(0);
 }
