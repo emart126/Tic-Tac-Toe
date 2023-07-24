@@ -7,7 +7,7 @@
 
 // fill row vectors with data from the board b
 std::vector<std::vector<std::string>> fillRows(std::vector<std::string> b, int size) {
-    int brdI, vecI, innerVecI = 0;
+    int brdI = 0, vecI = 0, innerVecI = 0;
     std::vector<std::vector<std::string>> rows(size, std::vector<std::string> (size, " "));
     
     while(vecI < size) {
@@ -25,7 +25,7 @@ std::vector<std::vector<std::string>> fillRows(std::vector<std::string> b, int s
 
 // fill column vectors with data from the board b
 std::vector<std::vector<std::string>> fillCols(std::vector<std::string> b, int size) {
-    int brdI, vecI, innerVecI = 0;
+    int brdI = 0, vecI = 0, innerVecI = 0;
     std::vector<std::vector<std::string>> cols(size, std::vector<std::string> (size, " ")); 
 
     while(vecI < size) {
@@ -44,7 +44,7 @@ std::vector<std::vector<std::string>> fillCols(std::vector<std::string> b, int s
 
 // fill diagonal vectors with data from the board b
 std::vector<std::vector<std::string>> fillDiagonals(std::vector<std::string> b, int size) {
-    int brdI, vecI, innerVecI = 0;
+    int brdI = 0, vecI = 0, innerVecI = 0;
     std::vector<std::vector<std::string>> diagonals(2, std::vector<std::string> (size, " "));
 
     while(vecI < 1) {
