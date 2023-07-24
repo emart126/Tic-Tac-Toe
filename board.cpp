@@ -225,9 +225,15 @@ void Board::show() {
 int main() {
     Board myB = Board();
     myB.show();
-    myB.set("A3", "X");
+    myB.set("A1", "X");
+    myB.set("A2", "O");
+    myB.set("A3", "O");
+    myB.set("B1", "O");
     myB.set("B2", "X");
-    myB.set("C1", "X");
+    myB.set("B3", "X");
+    myB.set("C1", "O");
+    myB.set("C2", "X");
+    myB.set("C3", "O");
     myB.show();
     std::cout << "Winner is : " << myB.getWinner() << std::endl;
 
