@@ -257,33 +257,33 @@ void Board::show() {
 
 
 
-int main() {
-    Board myB = Board();
-    myB.show();
-    myB.set("A1", "X");
-    myB.set("A2", "O");
-    myB.set("A3", "O");
-    myB.set("B1", "O");
-    myB.set("B2", "X");
-    myB.set("B3", "X");
-    myB.set("C1", "O");
-    myB.set("C2", "X");
-    myB.show();
-    if (myB.isDone()) {
-        std::cout << "error" << std::endl;
-    }
-    else {
-        std::cout << "game isnt done" << std::endl;
-    }
-    if (myB.isEmpty("C3")) {
-        std::cout << "c3 is empty" << std::endl;
-    }
-    myB.set("C3", "X");
-    myB.show();
-    if (myB.isDone()) {
-        std::cout << "game is now done" << std::endl; 
-    }
-    std::cout << "Winner is : " << myB.getWinner() << std::endl;
+// int main() {
+//     Board myB = Board();
+//     myB.show();
+//     myB.set("A1", "X");
+//     myB.set("A2", "O");
+//     myB.set("A3", "O");
+//     myB.set("B1", "O");
+//     myB.set("B2", "X");
+//     myB.set("B3", "X");
+//     myB.set("C1", "O");
+//     myB.set("C2", "X");
+//     myB.show();
+//     if (myB.isDone()) {
+//         std::cout << "error" << std::endl;
+//     }
+//     else {
+//         std::cout << "game isnt done" << std::endl;
+//     }
+//     if (myB.isEmpty("C3")) {
+//         std::cout << "c3 is empty" << std::endl;
+//     }
+//     myB.set("C3", "X");
+//     myB.show();
+//     if (myB.isDone()) {
+//         std::cout << "game is now done" << std::endl; 
+//     }
+//     std::cout << "Winner is : " << myB.getWinner() << std::endl;
 
-    return(0);
-}
+//     return(0);
+// }
