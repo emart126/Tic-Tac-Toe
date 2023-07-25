@@ -1,3 +1,4 @@
+#include <iostream>
 #include <string>
 #include <vector>
 #include "board.h"
@@ -14,17 +15,22 @@ class Player {
 
     public:
         // Class constructor -----------------------------------------------------------
-
-
+        Player();
 
         // Access functions -------------------------------------------------------------
 
+        // get instance of player's name
+        std::string getName();
 
+        // get instance of player's sign
+        std::string getSign();
 
         // Manipulation functions -------------------------------------------------------
 
-
-
+        // promt the use to choose a cell on the board, if the cell they chose is empty,
+        // update the board otherwise print a message that tells the user its an invalid cell
+        // and continue until it gets a valid input
+        void choose(Board b);
 };
 
 #endif
