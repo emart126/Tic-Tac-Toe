@@ -37,8 +37,24 @@ void Board::choose(Board b) {
     std::string userCell;
 
     while (continueLoop) {
-        std::cout << name << ", " << sign << ": Enter a cell ["<< alphR <<"-"<< alphL <<"]["<< numR <<"-"<< numL <<"]: " << endl;
+        cout << name << ", " << sign << ": Enter a cell ["<< alphR <<"-"<< alphL <<"]["<< numR <<"-"<< numL <<"]: " << endl;
         cin >> userCell;
         userCell[0] = toupper(userCell[0]);
+
+        for (int i = 0; i < b.cells.size(); i++) {
+            if (userCell == cells[i]) {
+                if (board.isEmpty(userCell)) {
+                    validInput = true;
+                    break;
+                }
+            }
+        }
+        if (validInput) {
+            continueLoop = false;
+        }
+        else {
+            cout << userCell << "is not an empty space to play, choose again." << endl;
+        }
     }
+    board.set(userCell, sign);
 }
