@@ -55,7 +55,7 @@ void Player::choose(Board b) {
             continueLoop = false;
         }
         else {
-            std::cout << userCell << "is not an empty space to play, choose again." << std::endl;
+            std::cout << userCell << " is not a valid space, choose again." << std::endl;
         }
     }
     b.set(userCell, sign);
