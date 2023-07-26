@@ -39,7 +39,7 @@ void Player::choose(Board b) {
     std::string userCell;
 
     while (continueLoop) {
-        std::cout << name << ", " << sign << ": Enter a cell ["<< alphR <<"-"<< alphL <<"]["<< numR <<"-"<< numL <<"]: " << std::endl;
+        std::cout << name << ", " << sign << ": Enter a cell ["<< alphR <<"-"<< alphL <<"]["<< numR <<"-"<< numL <<"]: ";
         std::cin >> userCell;
         userCell[0] = toupper(userCell[0]);
 

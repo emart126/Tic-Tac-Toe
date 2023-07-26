@@ -177,6 +177,7 @@ std::string Board::getWinner() {
 
 // set cell c in the board to sign s
 void Board::set(std::string c, std::string s) {
+    std::cout << "setting: " << c << " with: " << s << std::endl;
     int index;
     for (int i = 0; i < cells.size(); i++) {
         if (cells[i] == c) {
