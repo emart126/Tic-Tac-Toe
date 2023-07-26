@@ -7,15 +7,16 @@
 // board is a list of cells that are represented by strings (" ", "O", and "X")
 class Board {
     private:
-        // Board fields
+        // Board fields (private)
         std::string sign;
         std::string winner;
         int size;
         std::vector<std::string> board;
-        std::vector<std::string> cells;
-        
 
     public:
+        // Board fields (public)
+        std::vector<std::string> cells;
+
         // Class constructors -----------------------------------------------------------
 
         // constructor

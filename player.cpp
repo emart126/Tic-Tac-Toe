@@ -1,6 +1,8 @@
+#include <iostream>
 #include <string>
 #include <vector>
 #include "board.h"
+#include "player.h"
 
 
  // Class constructor -----------------------------------------------------------
@@ -14,36 +16,36 @@ Player::Player(std::string n, std::string s) {
 // Access functions -------------------------------------------------------------
 
 // get instance of player's name
-std::string Board::getName() {
+std::string Player::getName() {
     return(name);
 }
 
 // get instance of player's sign
-std::string Board::getSign() {
+std::string Player::getSign() {
     return(sign);
 }
 
 // Manipulation functions -------------------------------------------------------
 
 // allow player to choose and set a cell on board b
-void Board::choose(Board b) {
-    std::string alphR = (b.cells[0])[0];
-    std::string alphL = (b.cells[b.cells.size()-1])[0];
-    std::string numR = (b.cells[0])[1];
-    std::string numL = (b.cells[b.cells.size()-1])[1];
+void Player::choose(Board b) {
+    char alphR = (b.cells[0])[0];
+    char alphL = (b.cells[b.cells.size()-1])[0];
+    char numR = (b.cells[0])[1];
+    char numL = (b.cells[b.cells.size()-1])[1];
 
     bool validInput = false;
     bool continueLoop = true;
     std::string userCell;
 
     while (continueLoop) {
-        cout << name << ", " << sign << ": Enter a cell ["<< alphR <<"-"<< alphL <<"]["<< numR <<"-"<< numL <<"]: " << endl;
-        cin >> userCell;
+        std::cout << name << ", " << sign << ": Enter a cell ["<< alphR <<"-"<< alphL <<"]["<< numR <<"-"<< numL <<"]: " << std::endl;
+        std::cin >> userCell;
         userCell[0] = toupper(userCell[0]);
 
         for (int i = 0; i < b.cells.size(); i++) {
-            if (userCell == cells[i]) {
-                if (board.isEmpty(userCell)) {
+            if (userCell == b.cells[i]) {
+                if (b.isEmpty(userCell)) {
                     validInput = true;
                     break;
                 }
@@ -53,8 +55,8 @@ void Board::choose(Board b) {
             continueLoop = false;
         }
         else {
-            cout << userCell << "is not an empty space to play, choose again." << endl;
+            std::cout << userCell << "is not an empty space to play, choose again." << std::endl;
         }
     }
-    board.set(userCell, sign);
+    b.set(userCell, sign);
 }

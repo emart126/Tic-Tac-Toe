@@ -15,7 +15,7 @@ class Player {
 
     public:
         // Class constructor -----------------------------------------------------------
-        Player();
+        Player(std::string n, std::string s);
 
         // Access functions -------------------------------------------------------------
 
