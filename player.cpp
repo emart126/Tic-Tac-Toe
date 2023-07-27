@@ -27,6 +27,16 @@ std::string Player::getSign() {
 
 // Manipulation functions -------------------------------------------------------
 
+// sets the player's name
+void Player::setName(std::string n) {
+    name = n;
+}
+
+// sets the player's sign
+void Player::setSign(std::string s) {
+    sign = s;
+}
+
 // allow player to choose and set a cell on board b
 void Player::choose(Board* b) {
     char alphR = ((*b).cells[0])[0];

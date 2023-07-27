@@ -2,6 +2,7 @@
 #include <string>
 #include "board.h"
 #include "player.h"
+#include "AI.h"
 
 using namespace std;
 
@@ -15,7 +16,7 @@ int main() {
     cout << "Please enter a name to start: ";
     cin >> name1;
     Player player1 = Player(name1, "X");
-    Player player2 = Player("Bob", "O");
+    Player player2 = AI("Bob", "O");
     
     while (true) {
         Board B = Board();

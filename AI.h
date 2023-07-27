@@ -10,7 +10,8 @@
 // AI is an entity class in the game that is able to manipulatae and play on a board
 class AI : public Player {
     public:
-        // Class constructor -----------------------------------------------------------
+        // Class constructor ------------------------------------------------------------
+        AI();
         AI(std::string n, std::string s);
 
         // Manipulation functions -------------------------------------------------------
