@@ -38,10 +38,10 @@ int main() {
 
         winnerSign = B.getWinner();
         if (winnerSign == player1.getSign()) {
-            cout << player1.getName() << "is the winner!" << endl;
+            cout << player1.getName() << " is the winner!" << endl;
         }
         else if (winnerSign == player2.getSign()) {
-            cout << player2.getName() << "is the winner!" << endl;
+            cout << player2.getName() << " is the winner!" << endl;
         }
         else {
             cout << "It is a tie!" << endl;

@@ -177,7 +177,6 @@ std::string Board::getWinner() {
 
 // set cell c in the board to sign s
 void Board::set(std::string c, std::string s) {
-    // std::cout << "setting: " << c << " with: " << s << std::endl;
     int index;
     for (int i = 0; i < cells.size(); i++) {
         if (cells[i] == c) {
@@ -255,38 +254,3 @@ void Board::show() {
         std::cout << std::endl << line << std::endl;
     }
 }
-
-
-
-// int main() {
-//     Board myB = Board(5);
-//     myB.show();
-//     myB.set("A1", "X");
-//     myB.set("A2", "O");
-//     myB.set("A3", "O");
-//     myB.set("B1", "O");
-//     myB.set("B2", "X");
-//     myB.set("B3", "X");
-//     myB.set("C1", "O");
-//     myB.set("C2", "X");
-//     myB.show();
-//     if (myB.isDone()) {
-//         std::cout << "error" << std::endl;
-//     }
-//     else {
-//         std::cout << "game isnt done" << std::endl;
-//     }
-//     if (myB.isEmpty("C3")) {
-//         std::cout << "c3 is empty" << std::endl;
-//     }
-//     myB.set("C3", "X");
-//     myB.set("D4", "X");
-//     myB.set("E5", "X");
-//     myB.show();
-//     if (myB.isDone()) {
-//         std::cout << "game is now done" << std::endl; 
-//     }
-//     std::cout << "Winner is : " << myB.getWinner() << std::endl;
-
-//     return(0);
-// }
