@@ -7,6 +7,11 @@
 
  // Class constructor -----------------------------------------------------------
 
+Player::Player() {
+    name = "Bob";
+    sign = "+";
+}
+
 Player::Player(std::string n, std::string s) {
     // fill vars
     name = n;

@@ -7,7 +7,8 @@
 // Class constructor -----------------------------------------------------------
 
 AI::AI(std::string n, std::string s) {
-    
+    setName(n);
+    setSign(s);
 }
 
 // Manipulation functions -------------------------------------------------------
@@ -24,7 +25,7 @@ void AI::choose(Board* b) {
     std::string userCell;
 
     while (continueLoop) {
-        std::cout << name << ", " << sign << ": Enter a cell ["<< alphR <<"-"<< alphL <<"]["<< numR <<"-"<< numL <<"]: ";
+        std::cout << getName() << ", " << getSign() << ": Enter a cell ["<< alphR <<"-"<< alphL <<"]["<< numR <<"-"<< numL <<"]: ";
         std::cin >> userCell;
         userCell[0] = toupper(userCell[0]);
 
@@ -43,5 +44,5 @@ void AI::choose(Board* b) {
             std::cout << userCell << " is not a valid space, choose again." << std::endl;
         }
     }
-    (*b).set(userCell, sign);
+    (*b).set(userCell, getSign());
 }

@@ -11,7 +11,6 @@
 class AI : public Player {
     public:
         // Class constructor ------------------------------------------------------------
-        AI();
         AI(std::string n, std::string s);
 
         // Manipulation functions -------------------------------------------------------
