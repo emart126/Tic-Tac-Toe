@@ -213,7 +213,7 @@ bool Board::isDone() {
     std::vector<std::vector<std::string>> columns = fillCols(board, size);  
     std::vector<std::vector<std::string>> diagonals = fillDiagonals(board, size);
 
-    // check if a winner exists and
+    // check if a winner exists
     std::string winnerSign, currSign = " ";
     currSign = findWinner(rows);
     if (currSign != " ") {
@@ -227,6 +227,17 @@ bool Board::isDone() {
     if (currSign != " ") {
         return(true);
     }
+
+    // check if board is full
+    for (int i = 0; i < board.size(); i++) {
+        if (board[i] == " ") {
+            break;
+        }
+        else if (i == board.size()-1 && board[i] != " ") {
+            return(true);
+        } 
+    }
+
     return(false);
 }
 
