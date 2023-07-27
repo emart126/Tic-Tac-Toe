@@ -28,7 +28,7 @@ std::string Player::getSign() {
 // Manipulation functions -------------------------------------------------------
 
 // allow player to choose and set a cell on board b
-void Player::choose(Board b) {
+Board Player::choose(Board b) {
     char alphR = (b.cells[0])[0];
     char alphL = (b.cells[b.cells.size()-1])[0];
     char numR = (b.cells[0])[1];
@@ -59,4 +59,5 @@ void Player::choose(Board b) {
         }
     }
     b.set(userCell, sign);
+    return(b);
 }

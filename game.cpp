@@ -12,17 +12,17 @@ int main() {
     cout << "p1: " << one.getName() << ", " << one.getSign() << endl;
     cout << "p2: " << two.getName() << ", " << two.getSign() << endl;
     myB.show();
-    one.choose(myB);
+    myB = one.choose(myB);
     myB.show();
-    two.choose(myB);
+    myB = two.choose(myB);
     myB.show();
-    one.choose(myB);
+    myB = one.choose(myB);
     myB.show();
-    two.choose(myB);
+    myB = two.choose(myB);
     myB.show();
-    one.choose(myB);
+    myB = one.choose(myB);
     myB.show();
-    two.choose(myB);
+    myB = two.choose(myB);
     myB.show();
     cout << "winner: " << myB.getWinner() << endl;
 
