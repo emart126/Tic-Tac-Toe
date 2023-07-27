@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <stdlib.h>
 #include "board.h"
 #include "AI.h"
 
@@ -15,6 +16,7 @@ AI::AI(std::string n, std::string s) {
 
 // allow the ai to choose a cell on the board
 void AI::choose(Board* b) {
+    int random;
     char alphR = ((*b).cells[0])[0];
     char alphL = ((*b).cells[(*b).cells.size()-1])[0];
     char numR = ((*b).cells[0])[1];
@@ -22,27 +24,22 @@ void AI::choose(Board* b) {
 
     bool validInput = false;
     bool continueLoop = true;
-    std::string userCell;
+    std::string botCell;
 
     while (continueLoop) {
         std::cout << getName() << ", " << getSign() << ": Enter a cell ["<< alphR <<"-"<< alphL <<"]["<< numR <<"-"<< numL <<"]: ";
-        std::cin >> userCell;
-        userCell[0] = toupper(userCell[0]);
+        random = rand() % ((*b).cells.size()) + 1; // random num from 1 to board size
+        botCell = (*b).cells[random];
 
         for (int i = 0; i < (*b).cells.size(); i++) {
-            if (userCell == (*b).cells[i]) {
-                if ((*b).isEmpty(userCell)) {
-                    validInput = true;
-                    break;
-                }
+            if ((*b).isEmpty(botCell)) {
+                validInput = true;
+                break;
             }
         }
         if (validInput) {
             continueLoop = false;
         }
-        else {
-            std::cout << userCell << " is not a valid space, choose again." << std::endl;
-        }
     }
-    (*b).set(userCell, getSign());
+    (*b).set(botCell, getSign());
 }
