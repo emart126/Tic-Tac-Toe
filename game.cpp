@@ -6,15 +6,15 @@
 using namespace std;
 
 int main() {
-    std::string name;
+    std::string name1;
     std::string winnerSign;
     std::string again;
     bool p1Turn = true;
 
     cout << "Welcome to TIC-Tac-Toe Game!" << endl;
     cout << "Please enter a name to start: ";
-    cin >> name;
-    Player player1 = Player(name, "X");
+    cin >> name1;
+    Player player1 = Player(name1, "X");
     Player player2 = Player("Bob", "O");
     
     while (true) {
