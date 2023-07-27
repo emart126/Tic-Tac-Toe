@@ -27,7 +27,7 @@ class Player {
 
         // Manipulation functions -------------------------------------------------------
 
-        // promt the use to choose a cell on the board, if the cell they chose is empty,
+        // promt the user to choose a cell on the board, if the cell they chose is empty,
         // update the board otherwise print a message that tells the user its an invalid cell
         // and continue until it gets a valid input
         void choose(Board* b);
