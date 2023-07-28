@@ -27,8 +27,7 @@ void AI::choose(Board* b) {
     std::string botCell;
 
     while (continueLoop) {
-        std::cout << getName() << ", " << getSign() << ": Enter a cell ["<< alphR <<"-"<< alphL <<"]["<< numR <<"-"<< numL <<"]: ";
-        random = rand() % ((*b).cells.size()) + 1; // random num from 1 to board size
+        random = rand() % ((*b).cells.size()); // random num from 0 to board size - 1
         botCell = (*b).cells[random];
 
         for (int i = 0; i < (*b).cells.size(); i++) {
@@ -41,5 +40,6 @@ void AI::choose(Board* b) {
             continueLoop = false;
         }
     }
+    std::cout << getName() << ", " << getSign() << ": Enter a cell ["<< alphR <<"-"<< alphL <<"]["<< numR <<"-"<< numL <<"]: " << botCell << std::endl;
     (*b).set(botCell, getSign());
 }

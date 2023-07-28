@@ -7,19 +7,35 @@
 using namespace std;
 
 int main() {
+    int boardSize = 0;
     std::string name1;
     std::string winnerSign;
     std::string again;
     bool p1Turn = true;
 
+    // user chooses their name
     cout << "Welcome to TIC-Tac-Toe Game!" << endl;
-    cout << "Please enter a name to start: ";
-    cin >> name1;
+    cout << "Please enter a name: ";
+    std::cin >> name1;
     Player player1 = Player(name1, "X");
-    Player player2 = AI("Bob", "O");
-    
+    AI player2 = AI("Bob", "O");
+
+    // user chooses size of board
     while (true) {
-        Board B = Board();
+        cout << "Choose an n x n board size [3-9]: ";
+        std::cin >> boardSize;
+        if (boardSize < 3 || boardSize > 9) {
+            cout << "Invalid choice" << endl;
+        }
+        else {
+            break;
+        }
+    }
+    
+    // begin the game
+    while (true) {
+        // take turns until board has a done condtion
+        Board B = Board(boardSize);
         while (true) {
             B.show();
             if (p1Turn) {
@@ -37,6 +53,7 @@ int main() {
         }
         B.show();
 
+        // find whoeis the winner based on boards state
         winnerSign = B.getWinner();
         if (winnerSign == player1.getSign()) {
             cout << player1.getName() << " is the winner!" << endl;
@@ -48,8 +65,9 @@ int main() {
             cout << "It is a tie!" << endl;
         }
 
+        // ask if user wants to play again
         cout << "Would you like to play again? [Y/N]" << endl;
-        cin >> again;
+        std::cin >> again;
         again[0] = toupper(again[0]);
         if (again != "Y") {
             break;
