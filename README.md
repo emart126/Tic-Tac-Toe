@@ -7,19 +7,19 @@ a bot that plays with them.
 The application that allows to play the game through
 a terminal. Simply open this file to play the game.
 
-## game.cpp
+### game.cpp
 Main file that runs the game and uses multiple class
 files to fulfill running the game.
 
-## board.cpp
+### board.cpp
 Implementation of the board grid to allow players to 
 manipulate and play the game.
 
-## player.cpp
+### player.cpp
 Implementation of player class and allows there
 to be player for the game.
 
-## AI.cpp
+### AI.cpp
 child class of a player that allows for a bot to play
 on the board. Currently this AI only chooses places
 on the board at random.
