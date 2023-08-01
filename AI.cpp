@@ -74,12 +74,25 @@ std::vector<std::vector<std::string>> fillDiagonals(std::vector<std::string> b, 
     return(diagonals);
 }
 
-// finds if there exists a slot in a vector that is empty while all othes are sign
+// finds if there exists a slot in a vector that is empty while all others are sign
 bool findMissingOne(std::vector<std::vector<std::string>> vec, std::string sign) {
     int empty;
     for (int i = 0; i < vec.size(); i++) {
-        
+        empty = 0;
+        for (int j = 0; j < vec[i].size(); j++) {
+            if (vec[i][j] == " ") {
+                empty+=1;
+            }
+            else if (vec[i][j] != sign) {
+                empty = 0;
+                break;
+            }
+        }
+        if (empty == 1) {
+            return(true);
+        }
     }
+    return(false);
 }
 
 // find if there exists a cell that wins the game in this bots favor
@@ -88,8 +101,11 @@ std::string winningCell(std::vector<std::string> b, std::string sign, int size) 
     std::vector<std::vector<std::string>> columns = fillCols(b, size);  
     std::vector<std::vector<std::string>> diagonals = fillDiagonals(b, size);
 
+    // findMissingOne on each vector
+    
+    // if found corrilate the missing indeces to a cell
 
-
+    // return that cell, otherwise return null string 
     return("null");
 }
 
