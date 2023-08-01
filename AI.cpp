@@ -74,6 +74,12 @@ std::vector<std::vector<std::string>> fillDiagonals(std::vector<std::string> b, 
     return(diagonals);
 }
 
+// find if there exists a cell that wins the game in this bots favor
+std::string winningCell(std::vector<std::string> b, int size) {
+    
+    return("null");
+}
+
 
 // Class constructor -----------------------------------------------------------
 
