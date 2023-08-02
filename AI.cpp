@@ -8,7 +8,7 @@
 // Helper Functions ------------------------------------------------------------
 
 // fill row vectors with data from the board b
-std::vector<std::vector<std::string>> fillRows(std::vector<std::string> b, int size) {
+std::vector<std::vector<std::string>> getRows(std::vector<std::string> b, int size) {
     int brdI = 0, vecI = 0, innerVecI = 0;
     std::vector<std::vector<std::string>> rows(size, std::vector<std::string> (size, " "));
     
@@ -26,7 +26,7 @@ std::vector<std::vector<std::string>> fillRows(std::vector<std::string> b, int s
 }
 
 // fill column vectors with data from the board b
-std::vector<std::vector<std::string>> fillCols(std::vector<std::string> b, int size) {
+std::vector<std::vector<std::string>> getCols(std::vector<std::string> b, int size) {
     int brdI = 0, vecI = 0, innerVecI = 0;
     std::vector<std::vector<std::string>> cols(size, std::vector<std::string> (size, " ")); 
 
@@ -45,7 +45,7 @@ std::vector<std::vector<std::string>> fillCols(std::vector<std::string> b, int s
 }
 
 // fill diagonal vectors with data from the board b
-std::vector<std::vector<std::string>> fillDiagonals(std::vector<std::string> b, int size) {
+std::vector<std::vector<std::string>> getDiagonals(std::vector<std::string> b, int size) {
     int brdI = 0, vecI = 0, innerVecI = 0;
     std::vector<std::vector<std::string>> diagonals(2, std::vector<std::string> (size, " "));
 
@@ -99,7 +99,7 @@ bool findMissingOne(std::vector<std::vector<std::string>> vec, std::string sign)
 std::vector<int> getIndex(std::vector<std::vector<std::string>> vec) {
     int emptyI, emptyJ;
     for (int i = 0; i < vec.size(); i++) {
-        for (int j = 0; j < vec[i].size() j++) {
+        for (int j = 0; j < vec[i].size(); j++) {
             if (vec[i][j] == " ") {
                 emptyI = i;
                 emptyJ = j;
@@ -112,9 +112,9 @@ std::vector<int> getIndex(std::vector<std::vector<std::string>> vec) {
 
 // find if there exists a cell that wins the game in this bots favor
 std::string winningCell(std::vector<std::string> b, std::vector<std::string> cells, std::string sign, int size) {
-    std::vector<std::vector<std::string>> rows = fillRows(b, size);
-    std::vector<std::vector<std::string>> columns = fillCols(b, size);  
-    std::vector<std::vector<std::string>> diagonals = fillDiagonals(b, size);
+    std::vector<std::vector<std::string>> rows = getRows(b, size);
+    std::vector<std::vector<std::string>> columns = getCols(b, size);  
+    std::vector<std::vector<std::string>> diagonals = getDiagonals(b, size);
 
     std::vector<int> indeces;
     int Idx, Jdx;
