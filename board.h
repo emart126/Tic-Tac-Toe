@@ -11,11 +11,11 @@ class Board {
         std::string sign;
         std::string winner;
         int size;
-        std::vector<std::string> board;
 
     public:
         // Board fields (public)
         std::vector<std::string> cells;
+        std::vector<std::string> board;
 
         // Class constructors -----------------------------------------------------------
 

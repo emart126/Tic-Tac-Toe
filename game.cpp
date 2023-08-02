@@ -24,7 +24,7 @@ int main() {
     Player player1 = Player(name1, "X");
     AI player2 = AI("Bob", "O");
 
-    // user chooses size of board
+    // user chooses size of board           !!!known bug: if boradSize input is a string!!!
     while (true) {
         cout << "Choose an n x n board size [3-9]: ";
         std::cin >> boardSize;

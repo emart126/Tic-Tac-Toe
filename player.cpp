@@ -58,14 +58,14 @@ void Player::choose(Board* b) {
         std::cin >> userCell;
         userCell[0] = toupper(userCell[0]);
 
-        for (int i = 0; i < (*b).cells.size(); i++) {
-            if (userCell == (*b).cells[i]) {
+        // for (int i = 0; i < (*b).cells.size(); i++) {
+        //     if (userCell == (*b).cells[i]) {
                 if ((*b).isEmpty(userCell)) {
                     validInput = true;
-                    break;
+        //            break;
                 }
-            }
-        }
+        //     }
+        // }
         if (validInput) {
             continueLoop = false;
         }

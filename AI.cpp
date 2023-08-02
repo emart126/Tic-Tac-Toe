@@ -211,6 +211,7 @@ void AI::choose(Board* b) {
     char alphR = ((*b).cells[(*b).cells.size()-1])[0];
     char numL = ((*b).cells[0])[1];
     char numR = ((*b).cells[(*b).cells.size()-1])[1];
+    int rowSize = numL - '0';
 
     bool validInput = false;
     bool continueLoop = true;
@@ -218,14 +219,22 @@ void AI::choose(Board* b) {
 
     while (continueLoop) {
         random = rand() % ((*b).cells.size()); // random num from 0 to board size - 1
-        botCell = (*b).cells[random];
+        botCell = winningCell((*b).board, (*b).cells, getSign(), rowSize);
+        if (botCell != "null") {
+            //skip random
+            std::cout << "not random choice" << std::endl;
+        }
+        else {
+            std::cout << "random choice" << std::endl;
+            botCell = (*b).cells[random];
+        }
 
-        for (int i = 0; i < (*b).cells.size(); i++) {
+        //for (int i = 0; i < (*b).cells.size(); i++) {
             if ((*b).isEmpty(botCell)) {
                 validInput = true;
                 break;
             }
-        }
+       // }
         if (validInput) {
             continueLoop = false;
         }
