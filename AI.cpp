@@ -95,31 +95,63 @@ bool findMissingOne(std::vector<std::vector<std::string>> vec, std::string sign)
     return(false);
 }
 
+// get the index of the vector with the first space string in it
+std::vector<int> getIndex(std::vector<std::vector<std::string>> vec) {
+    int emptyI, emptyJ;
+    for (int i = 0; i < vec.size(); i++) {
+        for (int j = 0; j < vec[i].size() j++) {
+            if (vec[i][j] == " ") {
+                emptyI = i;
+                emptyJ = j;
+            }
+        }
+    }
+    std::vector result = {emptyI, emptyJ};
+    return(result);
+}
+
 // find if there exists a cell that wins the game in this bots favor
 std::string winningCell(std::vector<std::string> b, std::vector<std::string> cells, std::string sign, int size) {
     std::vector<std::vector<std::string>> rows = fillRows(b, size);
     std::vector<std::vector<std::string>> columns = fillCols(b, size);  
     std::vector<std::vector<std::string>> diagonals = fillDiagonals(b, size);
 
-    // findMissingOne on each vector
-    std::vector<std::vector<std::string>> winningLine;
+    std::vector<int> indeces;
+    int Idx, Jdx;
+    int vecI = 0, innerVecI = 0, brdI = 0;
+
     if (findMissingOne(rows, sign)) {
-        winningLine = rows;
-        
+        indeces = getIndex(rows);
+        Idx = indeces[0];
+        Jdx = indeces[1];
+
+        while(vecI < size) {
+            if (vecI == Idx && innerVecI == Jdx) {
+                return(cells[brdI]);
+            }
+
+            brdI++;
+            innerVecI++;
+            if (innerVecI == size) {
+                innerVecI = 0;
+                vecI++;
+            }
+        }
     }
     else if (findMissingOne(columns, sign)) {
-        winningLine = columns;
-        
+        indeces = getIndex(columns);
+        Idx = indeces[0];
+        Jdx = indeces[1];
+
     }
     else if (findMissingOne(diagonals, sign)) {
-        winningLine = diagonals;
+        indeces = getIndex(diagonals);
+        Idx = indeces[0];
+        Jdx = indeces[1];
 
     }
-    else {
-        return("null");
-    }
+    return("null");
 }
-
 
 // Class constructor -----------------------------------------------------------
 
@@ -133,10 +165,10 @@ AI::AI(std::string n, std::string s) {
 // allow the ai to choose a cell on the board
 void AI::choose(Board* b) {
     int random;
-    char alphR = ((*b).cells[0])[0];
-    char alphL = ((*b).cells[(*b).cells.size()-1])[0];
-    char numR = ((*b).cells[0])[1];
-    char numL = ((*b).cells[(*b).cells.size()-1])[1];
+    char alphL = ((*b).cells[0])[0];
+    char alphR = ((*b).cells[(*b).cells.size()-1])[0];
+    char numL = ((*b).cells[0])[1];
+    char numR = ((*b).cells[(*b).cells.size()-1])[1];
 
     bool validInput = false;
     bool continueLoop = true;
@@ -156,6 +188,6 @@ void AI::choose(Board* b) {
             continueLoop = false;
         }
     }
-    std::cout << getName() << ", " << getSign() << ": Enter a cell ["<< alphR <<"-"<< alphL <<"]["<< numR <<"-"<< numL <<"]: " << botCell << std::endl;
+    std::cout << getName() << ", " << getSign() << ": Enter a cell ["<< alphL <<"-"<< alphR <<"]["<< numL <<"-"<< numR <<"]: " << botCell << std::endl;
     (*b).set(botCell, getSign());
 }

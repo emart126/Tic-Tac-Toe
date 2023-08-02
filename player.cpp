@@ -44,17 +44,17 @@ void Player::setSign(std::string s) {
 
 // allow player to choose and set a cell on board b
 void Player::choose(Board* b) {
-    char alphR = ((*b).cells[0])[0];
-    char alphL = ((*b).cells[(*b).cells.size()-1])[0];
-    char numR = ((*b).cells[0])[1];
-    char numL = ((*b).cells[(*b).cells.size()-1])[1];
+    char alphL = ((*b).cells[0])[0];
+    char alphR = ((*b).cells[(*b).cells.size()-1])[0];
+    char numL = ((*b).cells[0])[1];
+    char numR = ((*b).cells[(*b).cells.size()-1])[1];
 
     bool validInput = false;
     bool continueLoop = true;
     std::string userCell;
 
     while (continueLoop) {
-        std::cout << name << ", " << sign << ": Enter a cell ["<< alphR <<"-"<< alphL <<"]["<< numR <<"-"<< numL <<"]: ";
+        std::cout << name << ", " << sign << ": Enter a cell ["<< alphL <<"-"<< alphR <<"]["<< numL <<"-"<< numR <<"]: ";
         std::cin >> userCell;
         userCell[0] = toupper(userCell[0]);
 
