@@ -96,17 +96,28 @@ bool findMissingOne(std::vector<std::vector<std::string>> vec, std::string sign)
 }
 
 // find if there exists a cell that wins the game in this bots favor
-std::string winningCell(std::vector<std::string> b, std::string sign, int size) {
+std::string winningCell(std::vector<std::string> b, std::vector<std::string> cells, std::string sign, int size) {
     std::vector<std::vector<std::string>> rows = fillRows(b, size);
     std::vector<std::vector<std::string>> columns = fillCols(b, size);  
     std::vector<std::vector<std::string>> diagonals = fillDiagonals(b, size);
 
     // findMissingOne on each vector
-    
-    // if found corrilate the missing indeces to a cell
+    std::vector<std::vector<std::string>> winningLine;
+    if (findMissingOne(rows, sign)) {
+        winningLine = rows;
+        
+    }
+    else if (findMissingOne(columns, sign)) {
+        winningLine = columns;
+        
+    }
+    else if (findMissingOne(diagonals, sign)) {
+        winningLine = diagonals;
 
-    // return that cell, otherwise return null string 
-    return("null");
+    }
+    else {
+        return("null");
+    }
 }
 
 
