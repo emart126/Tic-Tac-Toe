@@ -77,20 +77,25 @@ std::vector<std::vector<std::string>> getDiagonals(std::vector<std::string> b, i
 // finds if there exists a slot in a vector that is empty while all others are sign
 bool findMissingOne(std::vector<std::vector<std::string>> vec, std::string sign) {
     int empty;
+ //  std::cout << "vec size: " << vec.size() << std::endl;
     for (int i = 0; i < vec.size(); i++) {
         empty = 0;
+ //       std::cout << "i: " << i << std::endl;
         for (int j = 0; j < vec[i].size(); j++) {
             if (vec[i][j] == " ") {
                 empty+=1;
+ //               std::cout << "empty" << empty << std::endl;
             }
             else if (vec[i][j] != sign) {
                 empty = 0;
+ //               std::cout << "break" << std::endl;
                 break;
             }
         }
         if (empty == 1) {
             return(true);
         }
+ //       std::cout << "----" << std::endl;
     }
     return(false);
 }
@@ -120,6 +125,7 @@ std::string winningCell(std::vector<std::string> b, std::vector<std::string> cel
     int Idx, Jdx;
     int vecI, innerVecI, brdI;
 
+//    std::cout << "rows: " << std::endl;
     if (findMissingOne(rows, sign)) {
         vecI = 0, innerVecI = 0, brdI = 0;
         indeces = getIndex(rows);
@@ -139,6 +145,7 @@ std::string winningCell(std::vector<std::string> b, std::vector<std::string> cel
             }
         }
     }
+//    std::cout << "cols: " << std::endl;
     if (findMissingOne(columns, sign)) {
         vecI = 0, innerVecI = 0, brdI = 0;
         indeces = getIndex(columns);
@@ -159,6 +166,7 @@ std::string winningCell(std::vector<std::string> b, std::vector<std::string> cel
             }
         }
     }
+//    std::cout << "diags: " << std::endl;
     if (findMissingOne(diagonals, sign)) {
         vecI = 0, innerVecI = 0, brdI = 0;
         indeces = getIndex(diagonals);
@@ -211,7 +219,8 @@ void AI::choose(Board* b) {
     char alphR = ((*b).cells[(*b).cells.size()-1])[0];
     char numL = ((*b).cells[0])[1];
     char numR = ((*b).cells[(*b).cells.size()-1])[1];
-    int rowSize = numL - '0';
+    int rowSize = numR - '0';
+    //std::cout << "rowSize: " << rowSize << std::endl;
 
     bool validInput = false;
     bool continueLoop = true;
@@ -220,6 +229,7 @@ void AI::choose(Board* b) {
     while (continueLoop) {
         random = rand() % ((*b).cells.size()); // random num from 0 to board size - 1
         botCell = winningCell((*b).board, (*b).cells, getSign(), rowSize);
+        std::cout << "Current botCell: " << botCell << std::endl;
         if (botCell != "null") {
             //skip random
             std::cout << "not random choice" << std::endl;
