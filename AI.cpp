@@ -118,9 +118,10 @@ std::string winningCell(std::vector<std::string> b, std::vector<std::string> cel
 
     std::vector<int> indeces;
     int Idx, Jdx;
-    int vecI = 0, innerVecI = 0, brdI = 0;
+    int vecI, innerVecI, brdI;
 
     if (findMissingOne(rows, sign)) {
+        vecI = 0, innerVecI = 0, brdI = 0;
         indeces = getIndex(rows);
         Idx = indeces[0];
         Jdx = indeces[1];
@@ -138,17 +139,58 @@ std::string winningCell(std::vector<std::string> b, std::vector<std::string> cel
             }
         }
     }
-    else if (findMissingOne(columns, sign)) {
+    if (findMissingOne(columns, sign)) {
+        vecI = 0, innerVecI = 0, brdI = 0;
         indeces = getIndex(columns);
         Idx = indeces[0];
         Jdx = indeces[1];
 
+        while(vecI < size) {
+            if (vecI == Idx && innerVecI == Jdx) {
+                return(cells[brdI]);
+            }
+
+            brdI+=size;
+            innerVecI++;
+            if (innerVecI == size) {
+                innerVecI = 0;
+                vecI++;
+                brdI = vecI;
+            }
+        }
     }
-    else if (findMissingOne(diagonals, sign)) {
+    if (findMissingOne(diagonals, sign)) {
+        vecI = 0, innerVecI = 0, brdI = 0;
         indeces = getIndex(diagonals);
         Idx = indeces[0];
         Jdx = indeces[1];
+        
+        while(vecI < 1) {
+            if (vecI == Idx && innerVecI == Jdx) {
+                return(cells[brdI]);
+            }
 
+            brdI+=size+1;
+            innerVecI++;
+            if (innerVecI == size) {
+                innerVecI = 0;
+                vecI++;
+            }
+        }
+        brdI = size-1;
+        innerVecI = 0;
+        while(vecI < 2) {
+            if (vecI == Idx && innerVecI == Jdx) {
+                return(cells[brdI]);
+            }
+
+            brdI+=size-1;
+            innerVecI++;
+            if (innerVecI == size) {
+                innerVecI = 0;
+                vecI++;
+            }
+        }
     }
     return("null");
 }
