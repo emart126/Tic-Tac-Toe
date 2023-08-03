@@ -174,9 +174,13 @@ std::string winningCell(std::vector<std::string> b, std::vector<std::string> cel
 }
 
 // find if there exists a cell that stops the opponent from winning
-// std::string stopOpponent(std::vector<std::string> b, std::vector<std::string> cells, std::string sign, int size) {
-//     return;
-// }
+std::string stopOpponent(std::vector<std::string> b, std::vector<std::string> cells, std::string oppSign, int size) {
+    std::string oppWinningCell = winningCell(b, cells, oppSign, size);
+    if (oppWinningCell != "null") {
+        return(oppWinningCell);
+    }
+    return("null");
+}
 
 
 // Class constructor -----------------------------------------------------------
@@ -197,11 +201,10 @@ void AI::choose(Board* b) {
     char numR = ((*b).cells[(*b).cells.size()-1])[1];
     int rowSize = numR - '0';
 
-    bool validInput = false;
-    bool continueLoop = true;
     std::string botCell;
+    std::string checkCell;
 
-    while (continueLoop) {
+    while (true) {
         random = rand() % ((*b).cells.size()); // random num from 0 to board size - 1
         botCell = winningCell((*b).board, (*b).cells, getSign(), rowSize);
         if (botCell != "null") {
@@ -212,11 +215,7 @@ void AI::choose(Board* b) {
         }
 
         if ((*b).isEmpty(botCell)) {
-            validInput = true;
             break;
-        }
-        if (validInput) {
-            continueLoop = false;
         }
     }
     std::cout << getName() << ", " << getSign() << ": Enter a cell ["<< alphL <<"-"<< alphR <<"]["<< numL <<"-"<< numR <<"]: " << botCell << std::endl;
