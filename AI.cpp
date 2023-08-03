@@ -75,7 +75,7 @@ std::vector<std::vector<std::string>> getDiagonals(std::vector<std::string> b, i
 }
 
 // finds if there exists a slot in a vector that is empty while all others are sign
-bool findMissingOne(std::vector<std::vector<std::string>> vec, std::string sign) {
+bool findMissingOne(std::vector<std::vector<std::string>> vec, std::string sign, int* I, int* J) {
     int empty;
  //  std::cout << "vec size: " << vec.size() << std::endl;
     for (int i = 0; i < vec.size(); i++) {
@@ -88,6 +88,8 @@ bool findMissingOne(std::vector<std::vector<std::string>> vec, std::string sign)
             }
             else if (vec[i][j] != sign) {
                 empty = 0;
+                *I = i;
+                *J = j;
  //               std::cout << "break" << std::endl;
                 break;
             }
@@ -98,21 +100,6 @@ bool findMissingOne(std::vector<std::vector<std::string>> vec, std::string sign)
  //       std::cout << "----" << std::endl;
     }
     return(false);
-}
-
-// get the index of the vector with the first space string in it
-std::vector<int> getIndex(std::vector<std::vector<std::string>> vec) {
-    int emptyI, emptyJ;
-    for (int i = 0; i < vec.size(); i++) {
-        for (int j = 0; j < vec[i].size(); j++) {
-            if (vec[i][j] == " ") {
-                emptyI = i;
-                emptyJ = j;
-            }
-        }
-    }
-    std::vector result = {emptyI, emptyJ};
-    return(result);
 }
 
 // find if there exists a cell that wins the game in this bots favor
@@ -126,11 +113,8 @@ std::string winningCell(std::vector<std::string> b, std::vector<std::string> cel
     int vecI, innerVecI, brdI;
 
 //    std::cout << "rows: " << std::endl;
-    if (findMissingOne(rows, sign)) {
+    if (findMissingOne(rows, sign, &Idx, &Jdx)) {
         vecI = 0, innerVecI = 0, brdI = 0;
-        indeces = getIndex(rows);
-        Idx = indeces[0];
-        Jdx = indeces[1];
 
         while(vecI < size) {
             if (vecI == Idx && innerVecI == Jdx) {
@@ -146,11 +130,8 @@ std::string winningCell(std::vector<std::string> b, std::vector<std::string> cel
         }
     }
 //    std::cout << "cols: " << std::endl;
-    if (findMissingOne(columns, sign)) {
+    if (findMissingOne(columns, sign, &Idx, &Jdx)) {
         vecI = 0, innerVecI = 0, brdI = 0;
-        indeces = getIndex(columns);
-        Idx = indeces[0];
-        Jdx = indeces[1];
 
         while(vecI < size) {
             if (vecI == Idx && innerVecI == Jdx) {
@@ -167,11 +148,8 @@ std::string winningCell(std::vector<std::string> b, std::vector<std::string> cel
         }
     }
 //    std::cout << "diags: " << std::endl;
-    if (findMissingOne(diagonals, sign)) {
+    if (findMissingOne(diagonals, sign, &Idx, &Jdx)) {
         vecI = 0, innerVecI = 0, brdI = 0;
-        indeces = getIndex(diagonals);
-        Idx = indeces[0];
-        Jdx = indeces[1];
         
         while(vecI < 1) {
             if (vecI == Idx && innerVecI == Jdx) {
