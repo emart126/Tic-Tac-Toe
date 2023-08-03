@@ -190,7 +190,20 @@ AI::AI(std::string n, std::string s) {
     setSign(s);
 }
 
-// Manipulation functions -------------------------------------------------------
+// Access functions ------------------------------------------------------------
+
+// get sign of oppenent
+std::string AI::getOppSign(Board* b) {
+    std::string mySign = getSign();
+    for (int i = 0; i < (*b).board.size(); i++) {
+        if ((*b).board[i] != mySign && (*b).board[i] != " ") {
+            return((*b).board[i]);
+        }
+    }
+    return("null");
+}
+
+// Manipulation functions ------------------------------------------------------
 
 // allow the ai to choose a cell on the board
 void AI::choose(Board* b) {
@@ -201,19 +214,32 @@ void AI::choose(Board* b) {
     char numR = ((*b).cells[(*b).cells.size()-1])[1];
     int rowSize = numR - '0';
 
+    bool needCell = true;
+    std::string oppSign;
     std::string botCell;
     std::string checkCell;
 
-    while (true) {
-        random = rand() % ((*b).cells.size()); // random num from 0 to board size - 1
-        botCell = winningCell((*b).board, (*b).cells, getSign(), rowSize);
-        if (botCell != "null") {
-            //skip random
-        }
-        else {
-            botCell = (*b).cells[random];
-        }
+    // find cell to win game
+    checkCell = winningCell((*b).board, (*b).cells, getSign(), rowSize);
+    if (needCell && checkCell != "null") {
+        botCell = checkCell;
+        needCell = false;
+    }
 
+    // find cell to stop opponent from winning
+    oppSign = getOppSign(b);
+    if (oppSign != "null") {
+        checkCell = stopOpponent((*b).board, (*b).cells, oppSign, rowSize);
+        if (needCell && checkCell != "null") {
+            botCell = checkCell;
+            needCell = false;
+        }
+    }
+
+    // choose random cell
+    while (needCell) {
+        random = rand() % ((*b).cells.size()); // random num from 0 to board size - 1
+        botCell = (*b).cells[random];
         if ((*b).isEmpty(botCell)) {
             break;
         }

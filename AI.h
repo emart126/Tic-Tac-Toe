@@ -13,6 +13,11 @@ class AI : public Player {
         // Class constructor ------------------------------------------------------------
         AI(std::string n, std::string s);
 
+        // Access functions -------------------------------------------------------------
+
+        // get sign of oppenent
+        std::string getOppSign(Board* b);
+
         // Manipulation functions -------------------------------------------------------
 
         // allow the ai to choose a cell on the board
