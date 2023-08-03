@@ -236,6 +236,8 @@ void AI::choose(Board* b) {
         }
     }
 
+    // attempt to make a line (choose longest line on current board thats possible to win)
+
     // choose random cell
     while (needCell) {
         random = rand() % ((*b).cells.size()); // random num from 0 to board size - 1
