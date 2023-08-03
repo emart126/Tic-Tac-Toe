@@ -84,12 +84,13 @@ bool findMissingOne(std::vector<std::vector<std::string>> vec, std::string sign,
         for (int j = 0; j < vec[i].size(); j++) {
             if (vec[i][j] == " ") {
                 empty+=1;
+                *I = i;
+                *J = j;
+                std::cout << "here>>> " << i << ", " << j << std::endl; 
  //               std::cout << "empty" << empty << std::endl;
             }
             else if (vec[i][j] != sign) {
                 empty = 0;
-                *I = i;
-                *J = j;
  //               std::cout << "break" << std::endl;
                 break;
             }
@@ -115,6 +116,7 @@ std::string winningCell(std::vector<std::string> b, std::vector<std::string> cel
 //    std::cout << "rows: " << std::endl;
     if (findMissingOne(rows, sign, &Idx, &Jdx)) {
         vecI = 0, innerVecI = 0, brdI = 0;
+        std::cout << Idx << ", " << Jdx << std::endl; 
 
         while(vecI < size) {
             if (vecI == Idx && innerVecI == Jdx) {
