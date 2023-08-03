@@ -17,7 +17,7 @@ int main() {
     std::string again;
     bool p1Turn = true;
 
-    // user chooses their name
+    // user chooses their name              !!!known bug: if name input has multiple words it breaks next input!!!
     cout << "Welcome to TIC-Tac-Toe Game!" << endl;
     cout << "Please enter a name: ";
     std::cin >> name1;

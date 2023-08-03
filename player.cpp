@@ -48,26 +48,15 @@ void Player::choose(Board* b) {
     char alphR = ((*b).cells[(*b).cells.size()-1])[0];
     char numL = ((*b).cells[0])[1];
     char numR = ((*b).cells[(*b).cells.size()-1])[1];
-
-    bool validInput = false;
-    bool continueLoop = true;
     std::string userCell;
 
-    while (continueLoop) {
+    while (true) {
         std::cout << name << ", " << sign << ": Enter a cell ["<< alphL <<"-"<< alphR <<"]["<< numL <<"-"<< numR <<"]: ";
         std::cin >> userCell;
         userCell[0] = toupper(userCell[0]);
 
-        // for (int i = 0; i < (*b).cells.size(); i++) {
-        //     if (userCell == (*b).cells[i]) {
-                if ((*b).isEmpty(userCell)) {
-                    validInput = true;
-        //            break;
-                }
-        //     }
-        // }
-        if (validInput) {
-            continueLoop = false;
+        if ((*b).isEmpty(userCell)) {
+            break;
         }
         else {
             std::cout << userCell << " is not a valid space, choose again." << std::endl;

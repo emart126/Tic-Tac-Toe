@@ -7,7 +7,7 @@
 
 // Helper Functions ------------------------------------------------------------
 
-// fill row vectors with data from the board b
+// get row vectors with data from the board b
 std::vector<std::vector<std::string>> getRows(std::vector<std::string> b, int size) {
     int brdI = 0, vecI = 0, innerVecI = 0;
     std::vector<std::vector<std::string>> rows(size, std::vector<std::string> (size, " "));
@@ -25,7 +25,7 @@ std::vector<std::vector<std::string>> getRows(std::vector<std::string> b, int si
     return(rows);
 }
 
-// fill column vectors with data from the board b
+// get column vectors with data from the board b
 std::vector<std::vector<std::string>> getCols(std::vector<std::string> b, int size) {
     int brdI = 0, vecI = 0, innerVecI = 0;
     std::vector<std::vector<std::string>> cols(size, std::vector<std::string> (size, " ")); 
@@ -44,7 +44,7 @@ std::vector<std::vector<std::string>> getCols(std::vector<std::string> b, int si
     return(cols);
 }
 
-// fill diagonal vectors with data from the board b
+// get diagonal vectors with data from the board b
 std::vector<std::vector<std::string>> getDiagonals(std::vector<std::string> b, int size) {
     int brdI = 0, vecI = 0, innerVecI = 0;
     std::vector<std::vector<std::string>> diagonals(2, std::vector<std::string> (size, " "));
@@ -172,6 +172,12 @@ std::string winningCell(std::vector<std::string> b, std::vector<std::string> cel
     }
     return("null");
 }
+
+// find if there exists a cell that stops the opponent from winning
+// std::string stopOpponent(std::vector<std::string> b, std::vector<std::string> cells, std::string sign, int size) {
+//     return;
+// }
+
 
 // Class constructor -----------------------------------------------------------
 
