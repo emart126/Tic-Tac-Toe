@@ -271,7 +271,6 @@ std::string continueLine(std::vector<std::string> b, std::vector<std::string> ce
     }
 
     int indexOfLongest = -1;
-
     std::vector<std::vector<std::string>> LongestRowColDiag = {longestPossibleRow, longestPossibleCol, longestPossibleDiag};
     std::vector<std::string> longestPossibleLine = longestVec(LongestRowColDiag, sign, &indexOfLongest);
 
@@ -284,7 +283,8 @@ std::string continueLine(std::vector<std::string> b, std::vector<std::string> ce
     else if (indexOfLongest == 2) {
         indexOfLongest = indexLongDiag;
     }
-
+    
+    return("null");
 }
 
 // Class constructor -----------------------------------------------------------
