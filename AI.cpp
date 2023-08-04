@@ -187,7 +187,7 @@ std::string stopOpponent(std::vector<std::string> b, std::vector<std::string> ce
 // ------------------
 
 // return a list of indices of the vectors with a possible win state, otherwise return empty list 
-std::vector<int> isPossibleLine(std::vector<std::vector<std::string>> vec, std::string sign) {
+std::vector<int> arePossibleLines(std::vector<std::vector<std::string>> vec, std::string sign) {
     std::vector<int> possibleLines = {};
     bool currLine;
     for (int i = 0; i < vec.size(); i++) {
@@ -215,27 +215,19 @@ int signCount(std::vector<std::string> vec, std::string sign) {
     return(count);
 }
 
-// find if there exists a longest line that can be added to that will later win the game and return a cell within this line
-std::string continueLine(std::vector<std::string> b, std::vector<std::string> cells, std::string sign, int size) {
-    std::vector<std::vector<std::string>> rows = getRows(b, size);
-    std::vector<std::vector<std::string>> columns = getCols(b, size);  
-    std::vector<std::vector<std::string>> diagonals = getDiagonals(b, size);
-
+// return longest possible winning line given vec and indeces of possible winning lines
+std::vector<std::string> longestVec(std::vector<std::vector<std::string>> vec, std::string sign) {
     int currCount;
     int indexOfMax = -1;
     int maxCount = 0;
+    std::vector<int> lineIndeces;
 
-    // get possible lines within rows by index
-    std::vector<int> lineIndeces = isPossibleLine(rows, sign);
+    // get possible lines within vecs by index
+    lineIndeces = arePossibleLines(vec, sign);
     
     // check the amount of signs there are in each possible line
     for (int i = 0; i < lineIndeces.size(); i++) {
-        currCount = 0;
-        for (int j = 0; j < rows[lineIndeces[i]].size(); j++) {
-            if (rows[lineIndeces[i]][j] == sign) {    
-                currCount+=1;
-            }
-        }
+        currCount = signCount(vec[lineIndeces[i]], sign);
         if (currCount > maxCount) {
             maxCount = currCount;
             indexOfMax = lineIndeces[i];
@@ -243,13 +235,29 @@ std::string continueLine(std::vector<std::string> b, std::vector<std::string> ce
     }
 
     // get the line with the largest amount 
-    std::vector<std::string> longestPossibleRow;
+    std::vector<std::string> longestPossibleVec;
     if (indexOfMax != -1) {
-        longestPossibleRow = rows[indexOfMax];
+        longestPossibleVec = vec[indexOfMax];
     }
     else {
-        rows[lineIndeces[0]];
+        longestPossibleVec = vec[lineIndeces[0]];
     }
+    return(longestPossibleVec);
+}
+
+// find if there exists a longest line that can be added to that will later win the game and return a cell within this line
+std::string continueLine(std::vector<std::string> b, std::vector<std::string> cells, std::string sign, int size) {
+    std::vector<std::vector<std::string>> rows = getRows(b, size);
+    std::vector<std::vector<std::string>> columns = getCols(b, size);  
+    std::vector<std::vector<std::string>> diagonals = getDiagonals(b, size);
+
+    std::vector<std::string> longestPossibleRow = longestVec(rows, sign);
+    std::vector<std::string> longestPossibleCol = longestVec(columns, sign);
+    std::vector<std::string> longestPossibleDiag = longestVec(diagonals, sign);
+
+    std::vector<std::vector<std::string>> LongestRowColDiag = {longestPossibleRow, longestPossibleCol, longestPossibleDiag};
+    std::vector<std::string> longestPossibleLine = longestVec(LongestRowColDiag, sign);
+
 }
 
 // Class constructor -----------------------------------------------------------
