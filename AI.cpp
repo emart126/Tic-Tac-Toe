@@ -216,14 +216,19 @@ int signCount(std::vector<std::string> vec, std::string sign) {
 }
 
 // return longest possible winning line given vec and indeces of possible winning lines
-std::vector<std::string> longestVec(std::vector<std::vector<std::string>> vec, std::string sign) {
+std::vector<std::string> longestVec(std::vector<std::vector<std::string>> vec, std::string sign, int* iMax) {
     int currCount;
     int indexOfMax = -1;
-    int maxCount = 0;
+    int maxCount = -1;
     std::vector<int> lineIndeces;
+    std::vector<std::string> longestPossibleVec = {};
 
     // get possible lines within vecs by index
     lineIndeces = arePossibleLines(vec, sign);
+    if (lineIndeces.size() == 0) {
+        *iMax = -1;
+        return(longestPossibleVec);
+    }
     
     // check the amount of signs there are in each possible line
     for (int i = 0; i < lineIndeces.size(); i++) {
@@ -235,12 +240,13 @@ std::vector<std::string> longestVec(std::vector<std::vector<std::string>> vec, s
     }
 
     // get the line with the largest amount 
-    std::vector<std::string> longestPossibleVec;
     if (indexOfMax != -1) {
         longestPossibleVec = vec[indexOfMax];
+        *iMax = indexOfMax; 
     }
     else {
         longestPossibleVec = vec[lineIndeces[0]];
+        *iMax = 0;
     }
     return(longestPossibleVec);
 }
@@ -251,12 +257,33 @@ std::string continueLine(std::vector<std::string> b, std::vector<std::string> ce
     std::vector<std::vector<std::string>> columns = getCols(b, size);  
     std::vector<std::vector<std::string>> diagonals = getDiagonals(b, size);
 
-    std::vector<std::string> longestPossibleRow = longestVec(rows, sign);
-    std::vector<std::string> longestPossibleCol = longestVec(columns, sign);
-    std::vector<std::string> longestPossibleDiag = longestVec(diagonals, sign);
+    int indexLongRow = -1;
+    int indexLongCol = -1;
+    int indexLongDiag = -1;
+
+    std::vector<std::string> longestPossibleRow = longestVec(rows, sign, &indexLongRow);
+    std::vector<std::string> longestPossibleCol = longestVec(columns, sign, &indexLongCol);
+    std::vector<std::string> longestPossibleDiag = longestVec(diagonals, sign, &indexLongDiag);
+
+    // no possible winning lines
+    if (longestPossibleRow.size() == 0 && longestPossibleCol.size() == 0 && longestPossibleDiag.size() == 0) {
+        return("null");
+    }
+
+    int indexOfLongest = -1;
 
     std::vector<std::vector<std::string>> LongestRowColDiag = {longestPossibleRow, longestPossibleCol, longestPossibleDiag};
-    std::vector<std::string> longestPossibleLine = longestVec(LongestRowColDiag, sign);
+    std::vector<std::string> longestPossibleLine = longestVec(LongestRowColDiag, sign, &indexOfLongest);
+
+    if (indexOfLongest == 0) {
+        indexOfLongest = indexLongRow;
+    }
+    else if (indexOfLongest == 1) {
+        indexOfLongest = indexLongCol;
+    }
+    else if (indexOfLongest == 2) {
+        indexOfLongest = indexLongDiag;
+    }
 
 }
 
