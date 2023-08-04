@@ -7,7 +7,7 @@
 
 // Helper Functions ------------------------------------------------------------
 
-// get row vectors with data from the board b
+// return row vectors with data from the board b
 std::vector<std::vector<std::string>> getRows(std::vector<std::string> b, int size) {
     int brdI = 0, vecI = 0, innerVecI = 0;
     std::vector<std::vector<std::string>> rows(size, std::vector<std::string> (size, " "));
@@ -25,7 +25,7 @@ std::vector<std::vector<std::string>> getRows(std::vector<std::string> b, int si
     return(rows);
 }
 
-// get column vectors with data from the board b
+// return column vectors with data from the board b
 std::vector<std::vector<std::string>> getCols(std::vector<std::string> b, int size) {
     int brdI = 0, vecI = 0, innerVecI = 0;
     std::vector<std::vector<std::string>> cols(size, std::vector<std::string> (size, " ")); 
@@ -44,7 +44,7 @@ std::vector<std::vector<std::string>> getCols(std::vector<std::string> b, int si
     return(cols);
 }
 
-// get diagonal vectors with data from the board b
+// return diagonal vectors with data from the board b
 std::vector<std::vector<std::string>> getDiagonals(std::vector<std::string> b, int size) {
     int brdI = 0, vecI = 0, innerVecI = 0;
     std::vector<std::vector<std::string>> diagonals(2, std::vector<std::string> (size, " "));
@@ -74,6 +74,8 @@ std::vector<std::vector<std::string>> getDiagonals(std::vector<std::string> b, i
     return(diagonals);
 }
 
+// ------------------
+
 // finds if there exists a slot in a vector that is empty while all others are sign
 bool findMissingOne(std::vector<std::vector<std::string>> vec, std::string sign, int* I, int* J) {
     int empty;
@@ -97,7 +99,7 @@ bool findMissingOne(std::vector<std::vector<std::string>> vec, std::string sign,
     return(false);
 }
 
-// find if there exists a cell that wins the game in this bots favor
+// find if there exists a cell that wins the game in this bots favor and return that cell
 std::string winningCell(std::vector<std::string> b, std::vector<std::string> cells, std::string sign, int size) {
     std::vector<std::vector<std::string>> rows = getRows(b, size);
     std::vector<std::vector<std::string>> columns = getCols(b, size);  
@@ -173,7 +175,7 @@ std::string winningCell(std::vector<std::string> b, std::vector<std::string> cel
     return("null");
 }
 
-// find if there exists a cell that stops the opponent from winning
+// find if there exists a cell that stops the opponent from winning and return that cell
 std::string stopOpponent(std::vector<std::string> b, std::vector<std::string> cells, std::string oppSign, int size) {
     std::string oppWinningCell = winningCell(b, cells, oppSign, size);
     if (oppWinningCell != "null") {
@@ -182,6 +184,45 @@ std::string stopOpponent(std::vector<std::string> b, std::vector<std::string> ce
     return("null");
 }
 
+// ------------------
+
+// return a list of indices of the vectors with a possible win state, otherwise return empty list 
+std::vector<int> isPossibleLine(std::vector<std::vector<std::string>> vec, std::string sign) {
+    std::vector<int> possibleLines = {};
+    bool currLine;
+    for (int i = 0; i < vec.size(); i++) {
+        currLine = true;
+        for (int j = 0; j < vec[i].size(); j++) {
+            if (vec[i][j] != sign || vec[i][j] != " ") {
+                currLine = false;
+            }
+        }
+        if (currLine) {
+            possibleLines.push_back(i);
+        }
+    }
+    return(possibleLines);
+}
+
+// return the amount of signs in this line
+int signCount(std::vector<std::string> vec, std::string sign) {
+    int count = 0;
+    for (int i = 0; i < vec.size(); i++) {
+        if (vec[i] == sign) {
+            count+=1;
+        }
+    }
+    return(count);
+}
+
+// find if there exists a longest line that can be added to that will later win the game
+std::string continueLine(std::vector<std::string> b, std::vector<std::string> cells, std::string sign, int size) {
+    std::vector<std::vector<std::string>> rows = getRows(b, size);
+    std::vector<std::vector<std::string>> columns = getCols(b, size);  
+    std::vector<std::vector<std::string>> diagonals = getDiagonals(b, size);
+
+
+}
 
 // Class constructor -----------------------------------------------------------
 
@@ -228,15 +269,15 @@ void AI::choose(Board* b) {
 
     // find cell to stop opponent from winning
     oppSign = getOppSign(b);
-    if (oppSign != "null") {
+    if (needCell && oppSign != "null") {
         checkCell = stopOpponent((*b).board, (*b).cells, oppSign, rowSize);
-        if (needCell && checkCell != "null") {
+        if (checkCell != "null") {
             botCell = checkCell;
             needCell = false;
         }
     }
 
-    // attempt to make a line (choose longest line on current board thats possible to win)
+    // attempt to make a line (choose a cell on the longest line on the current board thats possible to win with)
 
     // choose random cell
     while (needCell) {
