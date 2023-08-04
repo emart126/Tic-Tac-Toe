@@ -221,7 +221,11 @@ std::string continueLine(std::vector<std::string> b, std::vector<std::string> ce
     std::vector<std::vector<std::string>> columns = getCols(b, size);  
     std::vector<std::vector<std::string>> diagonals = getDiagonals(b, size);
 
+    // get possible lines within rows by index
+    
+    // check the amount of signs are in it
 
+    // get the line with the largest amount 
 }
 
 // Class constructor -----------------------------------------------------------
