@@ -269,10 +269,16 @@ std::vector<int> getIndecesOfLine(int i, std::vector<std::vector<std::string>> v
     }
     else if (line == "diagonal") {
         if (i == 0) {
-
+            startingIndex = 0;
+            for (int k = startingIndex; k < size*size; k+=size+1) {
+                result.push_back(k);
+            }
         }
         else if (i == 1) {
-
+            startingIndex = size-1;
+            for (int k = startingIndex; k < size*size; k+=size-1) {
+                result.push_back(k);
+            }
         }
     }
     return(result);
@@ -319,7 +325,7 @@ std::string continueLine(std::vector<std::string> b, std::vector<std::string> ce
         l = "diagonal";
     }
     
-    std::vector<int> resultingLine = getIndecesOfLine(indexOfLongest, whichDirectedLine, l, size);
+    std::vector<int> resultingLine = getIndecesOfLine(indexOfLongest, whichDirectedLine, l, size); // WIP
 
     // get random index from resultingList and convert to string cell
 
