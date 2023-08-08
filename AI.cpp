@@ -251,6 +251,20 @@ std::vector<std::string> longestVec(std::vector<std::vector<std::string>> vec, s
     return(longestPossibleVec);
 }
 
+// convert index and line to list of all indeces within the line
+std::vector<int> getIndexOfLine(int i, std::vector<std::vector<std::string>> vec, std::string line, int size) {
+    std::vector<int> result(size, 0);
+    if (line == "row") {
+
+    }
+    else if (line == "column") {
+
+    }
+    else if (line == "diagonal") {
+
+    }
+}
+
 // find if there exists a longest line that can be added to that will later win the game and return a cell within this line
 std::string continueLine(std::vector<std::string> b, std::vector<std::string> cells, std::string sign, int size) {
     std::vector<std::vector<std::string>> rows = getRows(b, size);
@@ -260,6 +274,7 @@ std::string continueLine(std::vector<std::string> b, std::vector<std::string> ce
     int indexLongRow = -1;
     int indexLongCol = -1;
     int indexLongDiag = -1;
+    std::string l;
 
     std::vector<std::string> longestPossibleRow = longestVec(rows, sign, &indexLongRow);
     std::vector<std::string> longestPossibleCol = longestVec(columns, sign, &indexLongCol);
@@ -276,14 +291,20 @@ std::string continueLine(std::vector<std::string> b, std::vector<std::string> ce
 
     if (indexOfLongest == 0) {
         indexOfLongest = indexLongRow;
+        l = "row";
     }
     else if (indexOfLongest == 1) {
         indexOfLongest = indexLongCol;
+        l = "column";
     }
     else if (indexOfLongest == 2) {
         indexOfLongest = indexLongDiag;
+        l = "diagonal"
     }
     
+    std::vector<int> resultingLine = getIndexOfLine(indexOfLongest, LongestRowColDiag, l, size);
+
+    // work in progress
     return("null");
 }
 
