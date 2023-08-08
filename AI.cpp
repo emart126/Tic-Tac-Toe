@@ -253,7 +253,7 @@ std::vector<std::string> longestVec(std::vector<std::vector<std::string>> vec, s
 
 // convert index and line to list of all indeces within the line of the real board
 std::vector<int> getIndecesOfLine(int i, std::vector<std::vector<std::string>> vec, std::string line, int size) {
-    std::vector<int> result(size, 0);
+    std::vector<int> result;
     int startingIndex;
     if (line == "row") {
         startingIndex = i*size;
@@ -263,7 +263,9 @@ std::vector<int> getIndecesOfLine(int i, std::vector<std::vector<std::string>> v
     }
     else if (line == "column") {
         startingIndex = i;
-
+        for (int k = startingIndex; k < size*size; k+=size) {
+            result.push_back(k);
+        }
     }
     else if (line == "diagonal") {
         if (i == 0) {
@@ -273,6 +275,7 @@ std::vector<int> getIndecesOfLine(int i, std::vector<std::vector<std::string>> v
 
         }
     }
+    return(result);
 }
 
 // find if there exists a longest line that can be added to that will later win the game and return a cell within this line
