@@ -251,17 +251,27 @@ std::vector<std::string> longestVec(std::vector<std::vector<std::string>> vec, s
     return(longestPossibleVec);
 }
 
-// convert index and line to list of all indeces within the line
-std::vector<int> getIndexOfLine(int i, std::vector<std::vector<std::string>> vec, std::string line, int size) {
+// convert index and line to list of all indeces within the line of the real board
+std::vector<int> getIndecesOfLine(int i, std::vector<std::vector<std::string>> vec, std::string line, int size) {
     std::vector<int> result(size, 0);
+    int startingIndex;
     if (line == "row") {
-
+        startingIndex = i*size;
+        for (int k = startingIndex; k < size; k++) {
+            result.push_back(k);
+        }
     }
     else if (line == "column") {
+        startingIndex = i;
 
     }
     else if (line == "diagonal") {
+        if (i == 0) {
 
+        }
+        else if (i == 1) {
+
+        }
     }
 }
 
@@ -289,20 +299,26 @@ std::string continueLine(std::vector<std::string> b, std::vector<std::string> ce
     std::vector<std::vector<std::string>> LongestRowColDiag = {longestPossibleRow, longestPossibleCol, longestPossibleDiag};
     std::vector<std::string> longestPossibleLine = longestVec(LongestRowColDiag, sign, &indexOfLongest);
 
+    std::vector<std::vector<std::string>> whichDirectedLine;
     if (indexOfLongest == 0) {
         indexOfLongest = indexLongRow;
+        whichDirectedLine = rows;
         l = "row";
     }
     else if (indexOfLongest == 1) {
         indexOfLongest = indexLongCol;
+        whichDirectedLine = columns;
         l = "column";
     }
     else if (indexOfLongest == 2) {
         indexOfLongest = indexLongDiag;
-        l = "diagonal"
+        whichDirectedLine = diagonals;
+        l = "diagonal";
     }
     
-    std::vector<int> resultingLine = getIndexOfLine(indexOfLongest, LongestRowColDiag, l, size);
+    std::vector<int> resultingLine = getIndecesOfLine(indexOfLongest, whichDirectedLine, l, size);
+
+    // get random index from resultingList and convert to string cell
 
     // work in progress
     return("null");
