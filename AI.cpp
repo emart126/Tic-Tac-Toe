@@ -286,10 +286,10 @@ std::vector<int> getIndecesOfLine(int i, std::vector<std::vector<std::string>> v
 }
 
 // find if there exists a longest line that can be added to that will later win the game and return a cell within this line
-std::string continueLine(std::vector<std::string> b, std::vector<std::string> cells, std::string sign, int size) {
-    std::vector<std::vector<std::string>> rows = getRows(b, size);
-    std::vector<std::vector<std::string>> columns = getCols(b, size);  
-    std::vector<std::vector<std::string>> diagonals = getDiagonals(b, size);
+std::string continueLine(Board b, std::string sign, int size) {
+    std::vector<std::vector<std::string>> rows = getRows(b.board, size);
+    std::vector<std::vector<std::string>> columns = getCols(b.board, size);  
+    std::vector<std::vector<std::string>> diagonals = getDiagonals(b.board, size);
 
     int indexLongRow = -1;
     int indexLongCol = -1;
@@ -302,19 +302,18 @@ std::string continueLine(std::vector<std::string> b, std::vector<std::string> ce
 
     // no possible winning lines
     if (longestPossibleRow.size() == 0 && longestPossibleCol.size() == 0 && longestPossibleDiag.size() == 0) {
-        std::cout << "no possible winning line at the moment" << std::endl;
         return("null");
     }
 
     int indexOfLongest = -1;
     std::vector<std::vector<std::string>> LongestRowColDiag = {longestPossibleRow, longestPossibleCol, longestPossibleDiag};
     std::vector<std::string> longestPossibleLine = longestVec(LongestRowColDiag, sign, &indexOfLongest);
-    // print longestPossLine
-    std::cout << "Print longest line (" << longestPossibleLine.size() << "): " << std::endl;
-    for (int i = 0; i < longestPossibleLine.size(); i++) {
-        std::cout << longestPossibleLine[i] << ", ";
-    }
-    std::cout << std::endl;
+    // // print longestPossLine
+    // std::cout << "Print longest line (" << longestPossibleLine.size() << "): " << std::endl;
+    // for (int i = 0; i < longestPossibleLine.size(); i++) {
+    //     std::cout << longestPossibleLine[i] << ", ";
+    // }
+    // std::cout << std::endl;
 
     std::vector<std::vector<std::string>> whichDirectedLine;
     if (indexOfLongest == 0) {
@@ -332,20 +331,27 @@ std::string continueLine(std::vector<std::string> b, std::vector<std::string> ce
         whichDirectedLine = diagonals;
         l = "diagonal";
     }
-    std::cout << "string line is: " << l << std::endl;
+//    std::cout << "string line is: " << l << std::endl;
     
     std::vector<int> resultingLine = getIndecesOfLine(indexOfLongest, whichDirectedLine, l, size);
-    // printing resulting line
-    std::cout << "Print line (" << resultingLine.size() << "): " << std::endl;
-    for (int i = 0; i < resultingLine.size(); i++) {
-        std::cout << resultingLine[i] << ", ";
-    }
-    std::cout << std::endl;
+    // // printing resulting line
+    // std::cout << "Print line (" << resultingLine.size() << "): " << std::endl;
+    // for (int i = 0; i < resultingLine.size(); i++) {
+    //     std::cout << resultingLine[i] << ", ";
+    // }
+    // std::cout << std::endl;
 
     // get random index from resultingList and convert to string cell
-
-    // work in progress
-    return("null");
+    int random;
+    std::string cell;
+    while (true) {
+        random = rand() % (resultingLine.size()); // random num from 0 to resultingLine size
+        cell = b.cells[random];
+        if (b.isEmpty(cell)) {
+            break;
+        }
+    }
+    return(cell);
 }
 
 // Class constructor -----------------------------------------------------------
@@ -402,7 +408,7 @@ void AI::choose(Board* b) {
     }
 
     // attempt to make a line (choose a cell on the longest line on the current board thats possible to win with)
-    checkCell = continueLine((*b).board, (*b).cells, getSign(), rowSize);
+    checkCell = continueLine(b, getSign(), rowSize);
     if (needCell && checkCell != "null") {
         botCell = checkCell;
         needCell = false;
