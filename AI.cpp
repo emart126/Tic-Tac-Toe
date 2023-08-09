@@ -226,6 +226,7 @@ std::vector<std::string> longestVec(std::vector<std::vector<std::string>> vec, s
     // get possible lines within vecs by index
     lineIndeces = arePossibleLines(vec, sign);
     if (lineIndeces.size() == 0) {
+        std::cout << "got no possible lines within vecs by index" << std::endl;
         *iMax = -1;
         return(longestPossibleVec);
     }
@@ -301,6 +302,7 @@ std::string continueLine(std::vector<std::string> b, std::vector<std::string> ce
 
     // no possible winning lines
     if (longestPossibleRow.size() == 0 && longestPossibleCol.size() == 0 && longestPossibleDiag.size() == 0) {
+        std::cout << "no possible winning line at the moment" << std::endl;
         return("null");
     }
 
@@ -327,6 +329,7 @@ std::string continueLine(std::vector<std::string> b, std::vector<std::string> ce
     
     std::vector<int> resultingLine = getIndecesOfLine(indexOfLongest, whichDirectedLine, l, size);
     // printing resulting line
+    std::cout << "Print line:" << std::endl;
     for (int i = 0; i < size; i++) {
         std::cout << resultingLine[i] << " ";
     }
@@ -393,10 +396,10 @@ void AI::choose(Board* b) {
 
     // attempt to make a line (choose a cell on the longest line on the current board thats possible to win with)
     checkCell = continueLine((*b).board, (*b).cells, getSign(), rowSize);
-    if (needCell) {
+    if (needCell && checkCell != "null") {
         botCell = checkCell;
+        needCell = false;
     }
-
 
     // choose random cell
     while (needCell) {
