@@ -408,7 +408,7 @@ void AI::choose(Board* b) {
     }
 
     // attempt to make a line (choose a cell on the longest line on the current board thats possible to win with)
-    checkCell = continueLine(b, getSign(), rowSize);
+    checkCell = continueLine((*b), getSign(), rowSize);
     if (needCell && checkCell != "null") {
         botCell = checkCell;
         needCell = false;
