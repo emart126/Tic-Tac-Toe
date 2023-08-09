@@ -193,7 +193,7 @@ std::vector<int> arePossibleLines(std::vector<std::vector<std::string>> vec, std
     for (int i = 0; i < vec.size(); i++) {
         currLine = true;
         for (int j = 0; j < vec[i].size(); j++) {
-            if (vec[i][j] != sign || vec[i][j] != " ") {
+            if (vec[i][j] != sign && vec[i][j] != " ") {
                 currLine = false;
             }
         }
@@ -309,6 +309,12 @@ std::string continueLine(std::vector<std::string> b, std::vector<std::string> ce
     int indexOfLongest = -1;
     std::vector<std::vector<std::string>> LongestRowColDiag = {longestPossibleRow, longestPossibleCol, longestPossibleDiag};
     std::vector<std::string> longestPossibleLine = longestVec(LongestRowColDiag, sign, &indexOfLongest);
+    // print longestPossLine
+    std::cout << "Print longest line (" << longestPossibleLine.size() << "): " << std::endl;
+    for (int i = 0; i < longestPossibleLine.size(); i++) {
+        std::cout << longestPossibleLine[i] << ", ";
+    }
+    std::cout << std::endl;
 
     std::vector<std::vector<std::string>> whichDirectedLine;
     if (indexOfLongest == 0) {
@@ -326,12 +332,13 @@ std::string continueLine(std::vector<std::string> b, std::vector<std::string> ce
         whichDirectedLine = diagonals;
         l = "diagonal";
     }
+    std::cout << "string line is: " << l << std::endl;
     
     std::vector<int> resultingLine = getIndecesOfLine(indexOfLongest, whichDirectedLine, l, size);
     // printing resulting line
-    std::cout << "Print line:" << std::endl;
-    for (int i = 0; i < size; i++) {
-        std::cout << resultingLine[i] << " ";
+    std::cout << "Print line (" << resultingLine.size() << "): " << std::endl;
+    for (int i = 0; i < resultingLine.size(); i++) {
+        std::cout << resultingLine[i] << ", ";
     }
     std::cout << std::endl;
 
