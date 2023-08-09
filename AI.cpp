@@ -277,7 +277,7 @@ std::vector<int> getIndecesOfLine(int i, std::vector<std::vector<std::string>> v
         }
         else if (i == 1) {
             startingIndex = size-1;
-            for (int k = startingIndex; k < size*size; k+=size-1) {
+            for (int k = startingIndex; k < (size*size)-(size-1); k+=size-1) {
                 result.push_back(k);
             }
         }
