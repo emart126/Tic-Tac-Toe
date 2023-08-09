@@ -325,7 +325,12 @@ std::string continueLine(std::vector<std::string> b, std::vector<std::string> ce
         l = "diagonal";
     }
     
-    std::vector<int> resultingLine = getIndecesOfLine(indexOfLongest, whichDirectedLine, l, size); // WIP
+    std::vector<int> resultingLine = getIndecesOfLine(indexOfLongest, whichDirectedLine, l, size);
+    // printing resulting line
+    for (int i = 0; i < size; i++) {
+        std::cout << resultingLine[i] << " ";
+    }
+    std::cout << std::endl;
 
     // get random index from resultingList and convert to string cell
 
@@ -387,6 +392,11 @@ void AI::choose(Board* b) {
     }
 
     // attempt to make a line (choose a cell on the longest line on the current board thats possible to win with)
+    checkCell = continueLine((*b).board, (*b).cells, getSign(), rowSize);
+    if (needCell) {
+        botCell = checkCell;
+    }
+
 
     // choose random cell
     while (needCell) {
