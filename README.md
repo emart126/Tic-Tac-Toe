@@ -21,5 +21,4 @@ to be player for the game.
 
 ### AI.cpp
 child class of a player that allows for a bot to play
-on the board. Currently this AI only chooses places
-on the board at random.
+on the board. Currently this AI only makes decisions based on the game state.
