@@ -342,11 +342,12 @@ std::string continueLine(Board b, std::string sign, int size) {
     // std::cout << std::endl;
 
     // get random index from resultingList and convert to string cell
-    int random;
+    int random, randomIndex;
     std::string cell;
     while (true) {
         random = rand() % (resultingLine.size()); // random num from 0 to resultingLine size
-        cell = b.cells[random];
+        randomIndex = resultingLine[random];
+        cell = b.cells[randomIndex];
         if (b.isEmpty(cell)) {
             break;
         }
