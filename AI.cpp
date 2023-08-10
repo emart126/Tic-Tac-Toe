@@ -226,7 +226,6 @@ std::vector<std::string> longestVec(std::vector<std::vector<std::string>> vec, s
     // get possible lines within vecs by index
     lineIndeces = arePossibleLines(vec, sign);
     if (lineIndeces.size() == 0) {
-        std::cout << "got no possible lines within vecs by index" << std::endl;
         *iMax = -1;
         return(longestPossibleVec);
     }
@@ -308,12 +307,6 @@ std::string continueLine(Board b, std::string sign, int size) {
     int indexOfLongest = -1;
     std::vector<std::vector<std::string>> LongestRowColDiag = {longestPossibleRow, longestPossibleCol, longestPossibleDiag};
     std::vector<std::string> longestPossibleLine = longestVec(LongestRowColDiag, sign, &indexOfLongest);
-    // // print longestPossLine
-    // std::cout << "Print longest line (" << longestPossibleLine.size() << "): " << std::endl;
-    // for (int i = 0; i < longestPossibleLine.size(); i++) {
-    //     std::cout << longestPossibleLine[i] << ", ";
-    // }
-    // std::cout << std::endl;
 
     std::vector<std::vector<std::string>> whichDirectedLine;
     if (indexOfLongest == 0) {
@@ -331,15 +324,8 @@ std::string continueLine(Board b, std::string sign, int size) {
         whichDirectedLine = diagonals;
         l = "diagonal";
     }
-//    std::cout << "string line is: " << l << std::endl;
     
     std::vector<int> resultingLine = getIndecesOfLine(indexOfLongest, whichDirectedLine, l, size);
-    // // printing resulting line
-    // std::cout << "Print line (" << resultingLine.size() << "): " << std::endl;
-    // for (int i = 0; i < resultingLine.size(); i++) {
-    //     std::cout << resultingLine[i] << ", ";
-    // }
-    // std::cout << std::endl;
 
     // get random index from resultingList and convert to string cell
     int random, randomIndex;
