@@ -1,5 +1,5 @@
 # Tic-Tac-Toe
-Basic game of tic-tac-toe against an algorithm.
+The game of tic-tac-toe against an algorithm.
 The user chooses the board size and goes against
 a bot that plays with them.
 
